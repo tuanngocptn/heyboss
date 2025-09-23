@@ -87,15 +87,15 @@ const mockBossData: Record<string, BossData> = {
 
 const StarRating = ({ rating, t }: { rating: number, t: (key: string) => string }) => {
   return (
-    <div className="flex items-center space-x-1">
+    <div className="flex items-center space-x-2">
       {[1, 2, 3, 4, 5].map((star) => (
         <span
           key={star}
-          className={`text-lg md:text-2xl ${
+          className={`text-3xl md:text-4xl ${
             star <= rating ? 'text-yellow-500' : 'text-gray-400'
           }`}
         >
-          ★
+          ☠︎︎
         </span>
       ))}
       <span className="ml-2 md:ml-4 px-2 md:px-4 py-1 md:py-2 bg-red-600 text-white text-xs md:text-sm rounded-full font-semibold uppercase tracking-wide">
