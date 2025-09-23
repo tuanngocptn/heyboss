@@ -1,0 +1,141 @@
+{
+  "navigation": {
+    "home": "HeyBoss",
+    "directory": "Boss Directory",
+    "backToHome": "Back to Home",
+    "backToDirectory": "Back to Directory"
+  },
+  "home": {
+    "hero": {
+      "title": "That Toxic Boss Is {destroying} You - Take Back Your Power",
+      "destroying": "Destroying",
+      "subtitle": "You're not crazy. You're not weak. You're just tired.",
+      "quote": "I used to love my job. Now I can't sleep, can't focus, and I've started questioning if I'm even good at what I do. Is this what work is supposed to feel like?",
+      "showTruth": "Show Me The Truth",
+      "needHelp": "I Need Help Now"
+    },
+    "problems": {
+      "title": "How Many of These Sound Painfully Familiar?",
+      "items": [
+        "Your ideas are dismissed or stolen, then presented as theirs",
+        "You're blamed for problems you didn't create",
+        "They give you impossible deadlines, then criticize when you 'fail'",
+        "Your accomplishments are minimized, your mistakes are amplified",
+        "You feel like you're walking on eggshells every single day",
+        "They micromanage everything, then blame you for lack of initiative",
+        "You're excluded from important meetings about your own work",
+        "They change requirements constantly, setting you up to fail"
+      ]
+    },
+    "health": {
+      "title": "Your Body Is Screaming At You",
+      "symptoms": [
+        "Sunday night anxiety that ruins your weekend",
+        "Trouble sleeping because your mind won't stop racing",
+        "Constant headaches and muscle tension",
+        "Stomach problems and loss of appetite",
+        "Feeling exhausted even after a full night's sleep",
+        "Getting sick more often than usual"
+      ]
+    },
+    "solutions": {
+      "title": "It's Time to...",
+      "psychological": {
+        "title": "Psychological Armor",
+        "grayRock": "The Gray Rock Method: Becoming uninteresting to toxic people",
+        "detachment": "Emotional detachment techniques that actually work",
+        "boundaries": "Setting boundaries that stick (even with manipulators)"
+      },
+      "power": {
+        "title": "Power Reversal",
+        "documentation": "The documentation system that protects your reputation",
+        "communication": "How to communicate in ways that can't be twisted",
+        "alliances": "Building alliances without creating office politics"
+      },
+      "exit": {
+        "title": "Exit Strategy",
+        "jobSearch": "The stealth job search (without burning bridges)",
+        "interviews": "How to explain toxic situations in interviews",
+        "hrCase": "Building your case for HR or upper management"
+      }
+    },
+    "urgency": {
+      "title": "Every Day You Wait, It Gets Worse",
+      "reasons": [
+        "Every day you wait, they chip away more of your confidence",
+        "Other opportunities are passing while you're stuck in survival mode",
+        "Your physical and mental health are deteriorating",
+        "The longer you stay, the harder it becomes to leave"
+      ],
+      "cta": "START MY TRANSFORMATION"
+    },
+    "socialProof": {
+      "title": "You're Not Fighting This Battle Alone",
+      "stat1": "of workers have left jobs due to toxic management",
+      "stat2": "report improved mental health after leaving",
+      "stat3": "found better opportunities within 6 months",
+      "testimonial": "Six months ago, I was crying in my car before work every day. Today, I'm leading a team at a company that actually values what I bring to the table. The person you were before this toxic situation? They're still in there, waiting for you to fight for them.",
+      "attribution": "Sarah M., Marketing Director"
+    },
+    "finalCta": {
+      "title": "Take Back Your Power",
+      "description": "Your career, your mental health, and your future are worth fighting for.",
+      "button": "Get My Action Plan Now"
+    }
+  },
+  "directory": {
+    "title": "Toxic Boss Directory",
+    "description": "Search our database of reported toxic managers. Your experiences matter, and you deserve to know what you're walking into.",
+    "search": "Search by boss name or company...",
+    "results": "Found {count} result",
+    "resultsPlural": "Found {count} results",
+    "searchFor": "for \"{term}\"",
+    "noResults": {
+      "title": "No Results Found",
+      "description": "Try adjusting your search terms or browse all listings below."
+    },
+    "viewDetails": "View Details",
+    "reportSection": {
+      "title": "Don't See Your Boss Listed?",
+      "description": "Help others by sharing your experience. Every report helps build a safer workplace for everyone.",
+      "button": "Report a Toxic Boss"
+    },
+    "toxic": "TOXIC"
+  },
+  "boss": {
+    "notFound": {
+      "title": "Boss Not Found",
+      "backLink": "Back to Directory"
+    },
+    "totalReports": "Total Reports",
+    "reportButton": "Report This Boss",
+    "reportedIssues": "Reported Issues",
+    "issueCategories": "Issue Categories",
+    "detailedComplaints": "Detailed Complaints",
+    "reports": "reports",
+    "supportingDocs": {
+      "title": "Supporting Documents",
+      "pdfTitle": "PDF Viewer",
+      "pdfName": "That Toxic Boss Is Destroying You - Take Back Your Power.pdf",
+      "viewButton": "View Document"
+    },
+    "comments": {
+      "title": "Anonymous Comments",
+      "formLabel": "Share your experience anonymously:",
+      "placeholder": "Your experience will be posted anonymously. Help others by sharing what working with this boss was like...",
+      "anonymousNote": "Your comment will be posted anonymously",
+      "submitButton": "Post Anonymously",
+      "anonymousUser": "Anonymous User",
+      "noComments": "No comments yet. Be the first to share your experience."
+    },
+    "help": {
+      "title": "Dealing with a Similar Situation?",
+      "description": "You're not alone. Get the tools and strategies you need to protect yourself and take back your power.",
+      "button": "Get Help Now"
+    },
+    "toxic": "TOXIC"
+  },
+  "common": {
+    "languageSwitcher": "Language"
+  }
+}

@@ -1,0 +1,141 @@
+{
+  "navigation": {
+    "home": "HeyBoss",
+    "directory": "Danh Sách Sếp",
+    "backToHome": "Về Trang Chủ",
+    "backToDirectory": "Về Danh Sách"
+  },
+  "home": {
+    "hero": {
+      "title": "Ông Sếp Độc Hại Đó Đang {destroying} Bạn - Hãy Lấy Lại Quyền Lực",
+      "destroying": "Phá Hủy",
+      "subtitle": "Bạn không điên. Bạn không yếu đuối. Bạn chỉ mệt mỏi.",
+      "quote": "Tôi từng yêu công việc của mình. Giờ tôi không thể ngủ, không tập trung được, và bắt đầu nghi ngờ liệu mình có giỏi trong những gì mình làm không. Công việc có phải là như thế này không?",
+      "showTruth": "Cho Tôi Thấy Sự Thật",
+      "needHelp": "Tôi Cần Giúp Đỡ Ngay"
+    },
+    "problems": {
+      "title": "Bao Nhiêu Điều Này Nghe Quen Thuộc Đến Đau Đớn?",
+      "items": [
+        "Ý tưởng của bạn bị bác bỏ hoặc ăn cắp, sau đó được trình bày như ý tưởng của họ",
+        "Bạn bị đổ lỗi cho những vấn đề mà bạn không tạo ra",
+        "Họ đặt deadline bất khả thi, rồi chỉ trích khi bạn 'thất bại'",
+        "Thành tích của bạn bị giảm thiểu, sai lầm của bạn bị phóng đại",
+        "Bạn cảm thấy như đang đi trên vỏ trứng mỗi ngày",
+        "Họ quản lý tận răng mọi thứ, rồi đổ lỗi cho bạn vì thiếu sáng kiến",
+        "Bạn bị loại khỏi các cuộc họp quan trọng về công việc của chính mình",
+        "Họ thay đổi yêu cầu liên tục, chuẩn bị cho bạn thất bại"
+      ]
+    },
+    "health": {
+      "title": "Cơ Thể Bạn Đang Kêu Cứu",
+      "symptoms": [
+        "Căng thẳng đêm chủ nhật làm hỏng cả cuối tuần",
+        "Khó ngủ vì tâm trí không ngừng đua đi",
+        "Đau đầu và căng cơ liên tục",
+        "Vấn đề dạ dày và mất cảm giác thèm ăn",
+        "Cảm thấy kiệt sức ngay cả sau một đêm ngủ đủ giấc",
+        "Ốm bệnh thường xuyên hơn bình thường"
+      ]
+    },
+    "solutions": {
+      "title": "Đã Đến Lúc...",
+      "psychological": {
+        "title": "Áo Giáp Tâm Lý",
+        "grayRock": "Phương Pháp Gray Rock: Trở nên nhạt nhẽo với những người độc hại",
+        "detachment": "Kỹ thuật tách biệt cảm xúc thực sự hiệu quả",
+        "boundaries": "Thiết lập ranh giới bền vững (ngay cả với những kẻ thao túng)"
+      },
+      "power": {
+        "title": "Đảo Ngược Quyền Lực",
+        "documentation": "Hệ thống tài liệu bảo vệ danh tiếng của bạn",
+        "communication": "Cách giao tiếp không thể bị bóp méo",
+        "alliances": "Xây dựng liên minh mà không tạo chính trị văn phòng"
+      },
+      "exit": {
+        "title": "Chiến Lược Thoát Thân",
+        "jobSearch": "Tìm việc bí mật (không đốt cầu)",
+        "interviews": "Cách giải thích tình huống độc hại trong phỏng vấn",
+        "hrCase": "Xây dựng hồ sơ cho HR hoặc cấp trên"
+      }
+    },
+    "urgency": {
+      "title": "Mỗi Ngày Bạn Chờ Đợi, Mọi Thứ Càng Tệ Hơn",
+      "reasons": [
+        "Mỗi ngày bạn chờ đợi, họ lại phá hủy thêm sự tự tin của bạn",
+        "Các cơ hội khác đang trôi qua khi bạn mắc kẹt trong chế độ sinh tồn",
+        "Sức khỏe thể chất và tinh thần của bạn đang xấu đi",
+        "Càng ở lâu, càng khó rời đi"
+      ],
+      "cta": "BẮT ĐẦU SỰ THAY ĐỔI CỦA TÔI"
+    },
+    "socialProof": {
+      "title": "Bạn Không Đơn Độc Trong Cuộc Chiến Này",
+      "stat1": "người lao động đã nghỉ việc vì quản lý độc hại",
+      "stat2": "báo cáo sức khỏe tinh thần được cải thiện sau khi rời đi",
+      "stat3": "tìm được cơ hội tốt hơn trong vòng 6 tháng",
+      "testimonial": "Sáu tháng trước, tôi khóc trong xe trước khi đi làm mỗi ngày. Hôm nay, tôi đang lãnh đạo một đội nhóm tại một công ty thực sự đánh giá những gì tôi mang lại. Con người bạn trước tình huống độc hại này? Họ vẫn ở đó, chờ bạn đấu tranh cho họ.",
+      "attribution": "Sarah M., Giám Đốc Marketing"
+    },
+    "finalCta": {
+      "title": "Lấy Lại Quyền Lực Của Bạn",
+      "description": "Sự nghiệp, sức khỏe tinh thần và tương lai của bạn xứng đáng được đấu tranh.",
+      "button": "Nhận Kế Hoạch Hành Động Ngay"
+    }
+  },
+  "directory": {
+    "title": "Danh Sách Sếp Độc Hại",
+    "description": "Tìm kiếm trong cơ sở dữ liệu các quản lý độc hại đã được báo cáo. Trải nghiệm của bạn quan trọng, và bạn xứng đáng biết mình đang bước vào điều gì.",
+    "search": "Tìm kiếm theo tên sếp hoặc công ty...",
+    "results": "Tìm thấy {count} kết quả",
+    "resultsPlural": "Tìm thấy {count} kết quả",
+    "searchFor": "cho \"{term}\"",
+    "noResults": {
+      "title": "Không Tìm Thấy Kết Quả",
+      "description": "Thử điều chỉnh từ khóa tìm kiếm hoặc duyệt tất cả danh sách bên dưới."
+    },
+    "viewDetails": "Xem Chi Tiết",
+    "reportSection": {
+      "title": "Không Thấy Sếp Của Bạn Trong Danh Sách?",
+      "description": "Giúp người khác bằng cách chia sẻ trải nghiệm của bạn. Mỗi báo cáo giúp xây dựng môi trường làm việc an toàn hơn cho tất cả mọi người.",
+      "button": "Báo Cáo Sếp Độc Hại"
+    },
+    "toxic": "ĐỘC HẠI"
+  },
+  "boss": {
+    "notFound": {
+      "title": "Không Tìm Thấy Sếp",
+      "backLink": "Về Danh Sách"
+    },
+    "totalReports": "Tổng Báo Cáo",
+    "reportButton": "Báo Cáo Sếp Này",
+    "reportedIssues": "Vấn Đề Được Báo Cáo",
+    "issueCategories": "Danh Mục Vấn Đề",
+    "detailedComplaints": "Khiếu Nại Chi Tiết",
+    "reports": "báo cáo",
+    "supportingDocs": {
+      "title": "Tài Liệu Hỗ Trợ",
+      "pdfTitle": "Trình Xem PDF",
+      "pdfName": "Ông Sếp Độc Hại Đó Đang Phá Hủy Bạn - Lấy Lại Quyền Lực.pdf",
+      "viewButton": "Xem Tài Liệu"
+    },
+    "comments": {
+      "title": "Bình Luận Ẩn Danh",
+      "formLabel": "Chia sẻ trải nghiệm của bạn một cách ẩn danh:",
+      "placeholder": "Trải nghiệm của bạn sẽ được đăng ẩn danh. Hãy giúp người khác bằng cách chia sẻ việc làm việc với sếp này như thế nào...",
+      "anonymousNote": "Bình luận của bạn sẽ được đăng ẩn danh",
+      "submitButton": "Đăng Ẩn Danh",
+      "anonymousUser": "Người Dùng Ẩn Danh",
+      "noComments": "Chưa có bình luận nào. Hãy là người đầu tiên chia sẻ trải nghiệm của bạn."
+    },
+    "help": {
+      "title": "Đang Đối Mặt Với Tình Huống Tương Tự?",
+      "description": "Bạn không đơn độc. Nhận các công cụ và chiến lược bạn cần để bảo vệ bản thân và lấy lại quyền lực.",
+      "button": "Nhận Giúp Đỡ Ngay"
+    },
+    "toxic": "ĐỘC HẠI"
+  },
+  "common": {
+    "languageSwitcher": "Ngôn ngữ"
+  }
+}
