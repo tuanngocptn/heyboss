@@ -92,44 +92,44 @@ export default function Directory() {
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Navigation */}
       <nav className="bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
-        <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="max-w-6xl mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold text-red-500">{t('navigation.home')}</Link>
-            <div className="flex items-center space-x-4">
-              <LanguageSwitcher />
+            <Link href="/" className="text-lg md:text-xl font-bold text-red-500">{t('navigation.home')}</Link>
+            <div className="flex items-center space-x-2 md:space-x-4">
               <Link
                 href="/"
-                className="px-4 py-2 border border-gray-600 text-white rounded-lg hover:bg-gray-800 transition-colors"
+                className="px-3 py-2 md:px-4 md:py-2 border border-gray-600 text-white text-sm md:text-base rounded-lg hover:bg-gray-800 transition-colors"
               >
                 {t('navigation.backToHome')}
               </Link>
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
       </nav>
 
       {/* Header Section */}
-      <section className="px-6 py-12">
+      <section className="px-4 md:px-6 py-8 md:py-12">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Toxic Boss Directory
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 px-2">
+            {t('directory.title')}
           </h1>
-          <p className="text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
-            Search our database of reported toxic managers. Your experiences matter, and you deserve to know what you&apos;re walking into.
+          <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 md:mb-8 max-w-3xl mx-auto px-2 leading-relaxed">
+            {t('directory.description')}
           </p>
 
           {/* Search Bar */}
-          <div className="max-w-2xl mx-auto mb-12">
+          <div className="max-w-2xl mx-auto mb-8 md:mb-12 px-2">
             <div className="relative">
               <input
                 type="text"
                 placeholder={t('directory.search')}
                 value={searchTerm}
                 onChange={(e) => handleSearch(e.target.value)}
-                className="w-full px-6 py-4 text-lg bg-gray-800 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                className="w-full px-4 md:px-6 py-3 md:py-4 text-base md:text-lg bg-gray-800 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent"
               />
-              <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
-                <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="absolute right-3 md:right-4 top-1/2 transform -translate-y-1/2">
+                <svg className="w-5 h-5 md:w-6 md:h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
@@ -139,10 +139,10 @@ export default function Directory() {
       </section>
 
       {/* Boss Profiles */}
-      <section className="px-6 pb-20">
+      <section className="px-4 md:px-6 pb-12 md:pb-20">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-8">
-            <p className="text-gray-300">
+          <div className="mb-6 md:mb-8 px-2">
+            <p className="text-sm md:text-base text-gray-300">
               {filteredBosses.length === 1
                 ? t('directory.results', {count: filteredBosses.length})
                 : t('directory.resultsPlural', {count: filteredBosses.length})
@@ -152,30 +152,30 @@ export default function Directory() {
           </div>
 
           {filteredBosses.length === 0 ? (
-            <div className="text-center py-12">
-              <div className="text-6xl mb-4">🔍</div>
-              <h2 className="text-2xl font-bold mb-4">{t('directory.noResults.title')}</h2>
-              <p className="text-gray-400">
+            <div className="text-center py-8 md:py-12 px-4">
+              <div className="text-4xl md:text-6xl mb-4">🔍</div>
+              <h2 className="text-xl md:text-2xl font-bold mb-4">{t('directory.noResults.title')}</h2>
+              <p className="text-gray-400 text-sm md:text-base">
                 {t('directory.noResults.description')}
               </p>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid gap-4 md:gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {filteredBosses.map((boss) => (
                 <div
                   key={boss.id}
-                  className="bg-gray-800 border border-gray-700 rounded-lg p-6 hover:bg-gray-750 transition-colors"
+                  className="bg-gray-800 border border-gray-700 rounded-lg p-4 md:p-6 hover:bg-gray-750 transition-colors"
                 >
                   {/* Boss Info */}
-                  <div className="mb-4">
-                    <h3 className="text-xl font-bold text-white mb-2">{boss.name}</h3>
-                    <p className="text-gray-300 text-lg mb-3">{boss.company}</p>
+                  <div className="mb-3 md:mb-4">
+                    <h3 className="text-lg md:text-xl font-bold text-white mb-1 md:mb-2">{boss.name}</h3>
+                    <p className="text-gray-300 text-base md:text-lg mb-2 md:mb-3">{boss.company}</p>
                     <StarRating rating={boss.rating} t={t} />
                   </div>
 
                   {/* Summary */}
-                  <div className="mb-6">
-                    <p className="text-gray-400 leading-relaxed">{boss.summary}</p>
+                  <div className="mb-4 md:mb-6">
+                    <p className="text-gray-400 leading-relaxed text-sm md:text-base">{boss.summary}</p>
                   </div>
 
                   {/* View Details Button */}
@@ -184,7 +184,7 @@ export default function Directory() {
                       pathname: '/boss/[id]',
                       params: { id: boss.id }
                     }}
-                    className="block w-full text-center px-4 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
+                    className="block w-full text-center px-3 md:px-4 py-2 md:py-3 bg-red-600 text-white text-sm md:text-base font-semibold rounded-lg hover:bg-red-700 transition-colors"
                   >
                     {t('directory.viewDetails')}
                   </Link>

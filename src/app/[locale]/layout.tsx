@@ -28,10 +28,15 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: Promise<{locale: string}>;
 }) {
-  const {locale} = await params;
+  const {locale: rawLocale} = await params;
 
-  // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
+  // Ensure that the incoming `locale` is valid and normalize it
+  const locale = routing.locales.includes(rawLocale as (typeof routing.locales)[number])
+    ? rawLocale as (typeof routing.locales)[number]
+    : routing.defaultLocale;
+
+  // If the locale was invalid, trigger a 404
+  if (rawLocale !== locale) {
     notFound();
   }
 
@@ -40,7 +45,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
           {children}

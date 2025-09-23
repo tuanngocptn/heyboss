@@ -7,8 +7,9 @@
   },
   "home": {
     "hero": {
-      "title": "Ông Sếp Độc Hại Đó Đang {destroying} Bạn - Hãy Lấy Lại Quyền Lực",
-      "destroying": "Phá Hủy",
+      "titleStart": "Ông Sếp Độc Hại Đó Đang ",
+      "destroying": "Phá Hủy Bạn",
+      "titleEnd": " - Hãy Lấy Lại Quyền Lực",
       "subtitle": "Bạn không điên. Bạn không yếu đuối. Bạn chỉ mệt mỏi.",
       "quote": "Tôi từng yêu công việc của mình. Giờ tôi không thể ngủ, không tập trung được, và bắt đầu nghi ngờ liệu mình có giỏi trong những gì mình làm không. Công việc có phải là như thế này không?",
       "showTruth": "Cho Tôi Thấy Sự Thật",

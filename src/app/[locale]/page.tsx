@@ -17,46 +17,46 @@ export default function Home() {
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-sm border-b border-gray-800">
-        <div className="max-w-6xl mx-auto px-6 py-4">
+        <div className="max-w-6xl mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
-            <Link href="/" className="text-xl font-bold text-red-500">{t('navigation.home')}</Link>
-            <div className="flex items-center space-x-4">
-              <LanguageSwitcher />
+            <Link href="/" className="text-lg md:text-xl font-bold text-red-500">{t('navigation.home')}</Link>
+            <div className="flex items-center space-x-2 md:space-x-4">
               <Link
                 href="/directory"
-                className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                className="px-3 py-2 md:px-4 md:py-2 bg-red-600 text-white text-sm md:text-base rounded-lg hover:bg-red-700 transition-colors"
               >
                 {t('navigation.directory')}
               </Link>
+              <LanguageSwitcher />
             </div>
           </div>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-20 px-6 py-20 text-center">
+      <section className="pt-16 md:pt-20 px-4 md:px-6 py-12 md:py-20 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-            {t.rich('home.hero.title', {
-              destroying: (chunks) => <span className="text-red-500">{chunks}</span>
-            })}
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-bold mb-4 md:mb-6 leading-tight px-2">
+            {t('home.hero.titleStart')}
+            <span className="text-red-500">{t('home.hero.destroying')}</span>
+            {t('home.hero.titleEnd')}
           </h1>
-          <h2 className="text-xl md:text-2xl text-gray-300 mb-8">
+          <h2 className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-6 md:mb-8 px-2">
             {t('home.hero.subtitle')}
           </h2>
-          <blockquote className="text-lg md:text-xl italic text-gray-400 mb-12 max-w-3xl mx-auto leading-relaxed">
+          <blockquote className="text-base sm:text-lg md:text-xl italic text-gray-400 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed px-4">
             "{t('home.hero.quote')}"
           </blockquote>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
             <button
               onClick={() => scrollToSection('problems')}
-              className="px-8 py-4 bg-red-600 text-white text-lg font-semibold rounded-lg hover:bg-red-700 transition-colors"
+              className="px-6 md:px-8 py-3 md:py-4 bg-red-600 text-white text-base md:text-lg font-semibold rounded-lg hover:bg-red-700 transition-colors"
             >
               {t('home.hero.showTruth')}
             </button>
             <button
               onClick={() => scrollToSection('problems')}
-              className="px-8 py-4 border-2 border-white text-white text-lg font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition-colors"
+              className="px-6 md:px-8 py-3 md:py-4 border-2 border-white text-white text-base md:text-lg font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition-colors"
             >
               {t('home.hero.needHelp')}
             </button>
@@ -65,18 +65,18 @@ export default function Home() {
       </section>
 
       {/* Problem Identification Section */}
-      <section id="problems" className="px-6 py-20 bg-gray-800">
+      <section id="problems" className="px-4 md:px-6 py-12 md:py-20 bg-gray-800">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-8 md:mb-12 px-2">
             {t('home.problems.title')}
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid gap-4 md:grid-cols-2 md:gap-6">
             {t.raw('home.problems.items').map((item: string, index: number) => (
-              <div key={index} className="flex items-start space-x-3">
-                <div className="w-6 h-6 bg-red-600 rounded flex-shrink-0 flex items-center justify-center mt-1">
-                  <span className="text-white text-sm">✓</span>
+              <div key={index} className="flex items-start space-x-3 p-3 md:p-0">
+                <div className="w-5 h-5 md:w-6 md:h-6 bg-red-600 rounded flex-shrink-0 flex items-center justify-center mt-1">
+                  <span className="text-white text-xs md:text-sm">✓</span>
                 </div>
-                <p className="text-lg">{item}</p>
+                <p className="text-base md:text-lg leading-relaxed">{item}</p>
               </div>
             ))}
           </div>

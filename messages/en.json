@@ -7,8 +7,9 @@
   },
   "home": {
     "hero": {
-      "title": "That Toxic Boss Is {destroying} You - Take Back Your Power",
-      "destroying": "Destroying",
+      "titleStart": "That Toxic Boss Is ",
+      "destroying": "Destroying You",
+      "titleEnd": " - Take Back Your Power",
       "subtitle": "You're not crazy. You're not weak. You're just tired.",
       "quote": "I used to love my job. Now I can't sleep, can't focus, and I've started questioning if I'm even good at what I do. Is this what work is supposed to feel like?",
       "showTruth": "Show Me The Truth",

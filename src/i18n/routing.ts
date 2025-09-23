@@ -8,6 +8,9 @@ export const routing = defineRouting({
   // Used when no locale matches
   defaultLocale: 'en',
 
+  // The locale detection strategy
+  localeDetection: true,
+
   pathnames: {
     '/': '/',
     '/directory': {
