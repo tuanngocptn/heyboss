@@ -51,13 +51,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center px-4">
             <button
               onClick={() => scrollToSection('problems')}
-              className="px-6 md:px-8 py-3 md:py-4 bg-red-600 text-white text-base md:text-lg font-semibold rounded-lg hover:bg-red-700 transition-colors"
+              className="px-6 md:px-8 py-3 md:py-4 bg-red-600 text-white text-base md:text-lg font-semibold rounded-lg hover:bg-red-700 transition-colors cursor-pointer"
             >
               {t('home.hero.showTruth')}
             </button>
             <button
               onClick={() => scrollToSection('problems')}
-              className="px-6 md:px-8 py-3 md:py-4 border-2 border-white text-white text-base md:text-lg font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition-colors"
+              className="px-6 md:px-8 py-3 md:py-4 border-2 border-white text-white text-base md:text-lg font-semibold rounded-lg hover:bg-white hover:text-gray-900 transition-colors cursor-pointer"
             >
               {t('home.hero.needHelp')}
             </button>
@@ -144,22 +144,64 @@ export default function Home() {
       </section>
 
       {/* Urgency Section */}
-      <section className="px-6 py-20">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-12">
-            {t('home.urgency.title')}
-          </h2>
-          <div className="space-y-6 mb-12">
+      <section className="relative px-4 md:px-6 py-16 md:py-24 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 overflow-hidden">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `linear-gradient(45deg, #ef4444 1px, transparent 1px), linear-gradient(-45deg, #ef4444 1px, transparent 1px)`,
+            backgroundSize: '20px 20px'
+          }}></div>
+        </div>
+
+        {/* Animated Background Elements */}
+        <div className="absolute top-10 left-10 w-32 h-32 bg-red-600/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 right-10 w-48 h-48 bg-red-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+
+        <div className="relative max-w-5xl mx-auto text-center">
+          {/* Main Title */}
+          <div className="mb-12 md:mb-16">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black mb-4 md:mb-6">
+              <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
+                {t('home.urgency.title')}
+              </span>
+            </h2>
+            <div className="w-24 md:w-32 h-1 bg-gradient-to-r from-red-600 via-red-500 to-red-600 mx-auto rounded-full"></div>
+          </div>
+
+          {/* Urgency Points */}
+          <div className="space-y-6 md:space-y-8 mb-12 md:mb-16">
             {t.raw('home.urgency.reasons').map((item: string, index: number) => (
-              <p key={index} className="text-xl text-red-400 font-semibold">{item}</p>
+              <div key={index} className="group">
+                <div className="bg-gradient-to-r from-transparent via-red-900/20 to-transparent p-6 md:p-8 rounded-2xl border border-red-500/20 backdrop-blur-sm transform transition-all duration-300 hover:scale-105 hover:border-red-500/40">
+                  <p className="text-lg sm:text-xl md:text-2xl text-red-400 font-bold leading-relaxed group-hover:text-red-300 transition-colors duration-300">
+                    {item}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
-          <button
-            onClick={() => scrollToSection('social-proof')}
-            className="px-12 py-6 bg-red-600 text-white text-xl font-bold rounded-lg hover:bg-red-700 transition-colors"
-          >
-            {t('home.urgency.cta')}
-          </button>
+
+          {/* CTA Button */}
+          <div className="relative">
+            <button
+              onClick={() => scrollToSection('social-proof')}
+              className="group relative px-8 md:px-16 py-4 md:py-6 bg-gradient-to-r from-red-600 via-red-500 to-red-600 text-white text-lg md:text-xl font-black rounded-2xl shadow-2xl transform transition-all duration-300 hover:scale-105 hover:shadow-red-500/25 cursor-pointer overflow-hidden"
+            >
+              {/* Button Background Animation */}
+              <div className="absolute inset-0 bg-gradient-to-r from-red-500 via-red-600 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+              {/* Button Content */}
+              <span className="relative z-10 tracking-wider">
+                {t('home.urgency.cta')}
+              </span>
+
+              {/* Shine Effect */}
+              <div className="absolute inset-0 -top-2 -bottom-2 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+            </button>
+
+            {/* Button Glow Effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-red-600 via-red-500 to-red-600 rounded-2xl blur-xl opacity-30 group-hover:opacity-50 transition-opacity duration-300 -z-10"></div>
+          </div>
         </div>
       </section>
 
@@ -183,10 +225,31 @@ export default function Home() {
               <p className="text-lg">{t('home.socialProof.stat3')}</p>
             </div>
           </div>
-          <blockquote className="text-xl italic text-center text-gray-300 max-w-4xl mx-auto">
-            "{t('home.socialProof.testimonial')}"
-            <footer className="text-lg text-gray-400 mt-4">- {t('home.socialProof.attribution')}</footer>
-          </blockquote>
+          <div className="max-w-4xl mx-auto">
+            <blockquote className="relative bg-gradient-to-br from-gray-800 to-gray-700 rounded-2xl p-8 md:p-12 shadow-2xl border border-gray-600/30">
+              {/* Large Quote Mark */}
+              <div className="absolute -top-6 -left-6 text-6xl md:text-8xl text-red-500/20 font-serif leading-none">"</div>
+
+              {/* Quote Content */}
+              <p className="text-lg md:text-xl text-gray-200 leading-relaxed font-medium text-left relative z-10 mb-6">
+                {t('home.socialProof.testimonial')}
+              </p>
+
+              {/* Attribution */}
+              <footer className="flex justify-end">
+                <div className="text-right">
+                  <div className="h-px w-16 bg-gradient-to-r from-transparent to-red-500 mb-3 ml-auto"></div>
+                  <cite className="text-base md:text-lg text-gray-300 not-italic font-semibold block">
+                    {t('home.socialProof.attribution')}
+                  </cite>
+                </div>
+              </footer>
+
+              {/* Decorative Corner Elements */}
+              <div className="absolute top-4 right-4 w-3 h-3 bg-red-500 rotate-45 opacity-60"></div>
+              <div className="absolute bottom-4 left-4 w-2 h-2 bg-red-400 rotate-45 opacity-40"></div>
+            </blockquote>
+          </div>
         </div>
       </section>
 

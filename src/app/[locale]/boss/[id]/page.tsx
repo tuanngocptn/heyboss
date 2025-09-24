@@ -199,7 +199,7 @@ export default function BossProfile({ params }: { params: Promise<{ id: string }
             <div className="text-center lg:text-right w-full lg:w-auto">
               <div className="text-2xl md:text-3xl font-bold text-red-500 mb-1">{boss.totalReports}</div>
               <div className="text-sm md:text-base text-gray-400 mb-4">{t('boss.totalReports')}</div>
-              <button className="w-full lg:w-auto px-4 md:px-6 py-2 md:py-3 bg-red-600 text-white text-sm md:text-base font-semibold rounded-lg hover:bg-red-700 transition-colors">
+              <button className="w-full lg:w-auto px-4 md:px-6 py-2 md:py-3 bg-red-600 text-white text-sm md:text-base font-semibold rounded-lg hover:bg-red-700 transition-colors cursor-pointer">
                 {t('boss.reportButton')}
               </button>
             </div>
@@ -257,7 +257,7 @@ export default function BossProfile({ params }: { params: Promise<{ id: string }
                 <p className="text-sm md:text-base text-gray-400 mb-4 px-4">
                   {t('boss.supportingDocs.pdfName')}
                 </p>
-                <button className="px-4 md:px-6 py-2 md:py-3 bg-blue-600 text-white text-sm md:text-base rounded-lg hover:bg-blue-700 transition-colors">
+                <button className="px-4 md:px-6 py-2 md:py-3 bg-blue-600 text-white text-sm md:text-base rounded-lg hover:bg-blue-700 transition-colors cursor-pointer">
                   {t('boss.supportingDocs.viewButton')}
                 </button>
               </div>
@@ -291,7 +291,7 @@ export default function BossProfile({ params }: { params: Promise<{ id: string }
                 </p>
                 <button
                   type="submit"
-                  className="w-full sm:w-auto px-4 md:px-6 py-2 bg-red-600 text-white text-sm md:text-base font-semibold rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full sm:w-auto px-4 md:px-6 py-2 bg-red-600 text-white text-sm md:text-base font-semibold rounded-lg hover:bg-red-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   disabled={!newComment.trim()}
                 >
                   {t('boss.comments.submitButton')}

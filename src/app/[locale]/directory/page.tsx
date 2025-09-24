@@ -203,7 +203,7 @@ export default function Directory() {
           <p className="text-xl text-gray-300 mb-8">
             {t('directory.reportSection.description')}
           </p>
-          <button className="px-8 py-4 bg-red-600 text-white text-lg font-semibold rounded-lg hover:bg-red-700 transition-colors">
+          <button className="px-8 py-4 bg-red-600 text-white text-lg font-semibold rounded-lg hover:bg-red-700 transition-colors cursor-pointer">
             {t('directory.reportSection.button')}
           </button>
         </div>
