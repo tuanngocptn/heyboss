@@ -20,6 +20,18 @@ export const routing = defineRouting({
     '/boss/[id]': {
       en: '/boss/[id]',
       vi: '/sep/[id]'
+    },
+    '/privacy': {
+      en: '/privacy',
+      vi: '/bao-mat'
+    },
+    '/terms': {
+      en: '/terms',
+      vi: '/dieu-khoan'
+    },
+    '/contact': {
+      en: '/contact',
+      vi: '/lien-he'
     }
   }
 });
