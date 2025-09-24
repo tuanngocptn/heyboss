@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "home": "HeyBoss",
+    "home": "HeyBoss.WTF",
     "directory": "Boss Directory",
     "backToHome": "Back to Home",
     "backToDirectory": "Back to Directory"
@@ -135,6 +135,114 @@
       "button": "Get Help Now"
     },
     "toxic": "TOXIC"
+  },
+  "footer": {
+    "copyright": "© 2024 heyboss.wtf - All rights reserved",
+    "tagline": "Take back your power from toxic bosses",
+    "links": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "contact": "Contact Us"
+    },
+    "disclaimer": "This site provides general information and resources. Always consult with legal professionals for specific workplace situations."
+  },
+  "privacy": {
+    "title": "Privacy Policy: Even Your Boss Can't Read This",
+    "subtitle": "Because unlike your toxic boss, we actually respect boundaries",
+    "intro": "Your toxic boss might read your emails, monitor your screen, and track your bathroom breaks, but we're different. Here's how we protect your data while you plot your escape from workplace hell.",
+    "dataCollection": {
+      "title": "What We Collect (Spoiler: Way Less Than Your Boss)",
+      "subtitle": "Your boss collects your soul. We just collect basic info.",
+      "items": [
+        "Email addresses (for when you need our survival tips)",
+        "Boss complaint submissions (anonymous, because we're not monsters)",
+        "Usage data (to see which toxic boss articles make you cry the most)",
+        "Cookies (the digital kind, not the ones your boss steals from the break room)"
+      ]
+    },
+    "dataUse": {
+      "title": "How We Use Your Info",
+      "subtitle": "Unlike your boss, we use it responsibly",
+      "items": [
+        "To send you escape plans and survival strategies",
+        "To improve our toxic boss detection algorithms",
+        "To create better content that validates your suffering",
+        "To help other victims identify similar workplace predators"
+      ]
+    },
+    "dataProtection": {
+      "title": "How We Protect Your Data",
+      "subtitle": "Better security than your boss's password ('password123')",
+      "content": "We use industry-standard encryption, secure servers, and we actually care about your privacy. Your toxic boss probably uses the same password for everything and leaves confidential documents on the printer."
+    }
+  },
+  "terms": {
+    "title": "Terms of Service: The Contract Your Boss Should Have Read",
+    "subtitle": "Unlike your employment contract, these terms are fair and transparent",
+    "intro": "Welcome to HeyBoss.WTF, where we treat users better than your boss treats you. By using our site, you agree to these terms (which are way more reasonable than whatever your boss makes you sign).",
+    "usage": {
+      "title": "How to Use This Site",
+      "subtitle": "Instructions clearer than anything your boss has ever given you",
+      "items": [
+        "Share your toxic boss stories (anonymously, because we're not stupid)",
+        "Search our database of workplace villains",
+        "Use our survival strategies (much better than 'just deal with it')",
+        "Don't doxx anyone (be better than your boss)"
+      ]
+    },
+    "prohibited": {
+      "title": "What Not to Do",
+      "subtitle": "Don't be like your toxic boss",
+      "items": [
+        "Don't post false information (leave the lying to management)",
+        "Don't harass other users (that's your boss's job)",
+        "Don't spam the site (we have enough problems)",
+        "Don't use this for actual stalking (seriously, don't)"
+      ]
+    },
+    "disclaimer": {
+      "title": "Legal Disclaimer",
+      "subtitle": "Because lawyers make us say this stuff",
+      "content": "This site is for informational purposes only. We're not lawyers, therapists, or career counselors (though we probably give better advice than your boss). Always consult professionals for serious workplace issues."
+    }
+  },
+  "contact": {
+    "title": "Contact Us: We Actually Respond (Unlike Your Boss)",
+    "subtitle": "Get in touch - we promise to be more helpful than HR",
+    "intro": "Need to reach us? Unlike your boss, we actually check our messages and respond in a reasonable timeframe. No 'let's circle back on this' or 'we'll touch base later' nonsense.",
+    "reasons": {
+      "title": "Reasons to Contact Us",
+      "items": [
+        "🚨 Report a new toxic boss for our database",
+        "💡 Submit survival strategies that actually work",
+        "🐛 Report bugs (the website kind, not the ones living in your boss's personality)",
+        "📰 Media inquiries (yes, toxic bosses are newsworthy)",
+        "🤝 Partnership opportunities (if you're fighting the good fight)",
+        "😭 Just need someone to validate your suffering"
+      ]
+    },
+    "methods": {
+      "title": "How to Reach Us",
+      "email": {
+        "title": "Email",
+        "address": "hello@heyboss.wtf",
+        "note": "We respond faster than your boss returns from 'quick' meetings"
+      },
+      "response": {
+        "title": "Response Time",
+        "content": "We aim to respond within 24-48 hours. Compare that to your boss who takes 3 weeks to approve your vacation request."
+      }
+    },
+    "tips": {
+      "title": "Tips for Better Communication",
+      "subtitle": "Unlike your boss, we appreciate these",
+      "items": [
+        "Be specific about your issue (we're not mind readers like your boss thinks they are)",
+        "Include screenshots if reporting bugs (visual proof, unlike your boss's 'feedback')",
+        "Stay anonymous if sharing boss stories (we protect whistleblowers)",
+        "Be patient - good communication takes time (revolutionary concept, we know)"
+      ]
+    }
   },
   "common": {
     "languageSwitcher": "Language"

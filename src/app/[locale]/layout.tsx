@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "HeyBoss - Fight Toxic Management",
+  title: "heyboss.wtf - Fight Toxic Management",
   description: "Take back your power from toxic bosses. Get tools and strategies to protect yourself and reclaim your career.",
 };
 

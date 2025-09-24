@@ -2,6 +2,7 @@
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/routing';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import Footer from '@/components/Footer';
 
 const scrollToSection = (sectionId: string) => {
   const element = document.getElementById(sectionId);
@@ -206,6 +207,8 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

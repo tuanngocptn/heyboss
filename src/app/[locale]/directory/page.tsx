@@ -2,6 +2,7 @@
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/routing';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import Footer from '@/components/Footer';
 import { useState } from "react";
 
 const mockBossData = [
@@ -55,7 +56,7 @@ const StarRating = ({ rating, t }: { rating: number, t: (key: string) => string 
       {[1, 2, 3, 4, 5].map((star) => (
         <span
           key={star}
-          className={`text-2xl ${
+          className={`text-4xl leading-none flex items-center justify-center ${
             star <= rating ? 'text-yellow-500' : 'text-gray-400'
           }`}
         >
@@ -207,6 +208,8 @@ export default function Directory() {
           </button>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

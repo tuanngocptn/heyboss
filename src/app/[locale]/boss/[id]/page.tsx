@@ -2,6 +2,7 @@
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/routing';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import Footer from '@/components/Footer';
 import { useState } from "react";
 import { use } from "react";
 
@@ -89,14 +90,14 @@ const StarRating = ({ rating, t }: { rating: number, t: (key: string) => string 
   return (
     <div className="flex items-center space-x-2">
       {[1, 2, 3, 4, 5].map((star) => (
-        <span
+        <div
           key={star}
-          className={`text-3xl md:text-4xl ${
+          className={`text-5xl md:text-6xl leading-none h-8 md:h-10 flex items-center justify-center ${
             star <= rating ? 'text-yellow-500' : 'text-gray-400'
           }`}
         >
           ☠︎︎
-        </span>
+        </div>
       ))}
       <span className="ml-2 md:ml-4 px-2 md:px-4 py-1 md:py-2 bg-red-600 text-white text-xs md:text-sm rounded-full font-semibold uppercase tracking-wide">
         {t('boss.toxic')}
@@ -342,6 +343,8 @@ export default function BossProfile({ params }: { params: Promise<{ id: string }
           </Link>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

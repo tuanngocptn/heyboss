@@ -1,6 +1,6 @@
 {
   "navigation": {
-    "home": "HeyBoss",
+    "home": "HeyBoss.WTF",
     "directory": "Danh Sách Sếp",
     "backToHome": "Về Trang Chủ",
     "backToDirectory": "Về Danh Sách"
@@ -135,6 +135,114 @@
       "button": "Nhận Giúp Đỡ Ngay"
     },
     "toxic": "ĐỘC HẠI"
+  },
+  "footer": {
+    "copyright": "© 2024 heyboss.wtf - Tất cả quyền được bảo lưu",
+    "tagline": "Lấy lại quyền lực từ những ông sếp độc hại",
+    "links": {
+      "privacy": "Chính Sách Bảo Mật",
+      "terms": "Điều Khoản Dịch Vụ",
+      "contact": "Liên Hệ"
+    },
+    "disclaimer": "Trang web này cung cấp thông tin và tài nguyên chung. Luôn tham khảo ý kiến chuyên gia pháp lý cho các tình huống cụ thể tại nơi làm việc."
+  },
+  "privacy": {
+    "title": "Chính Sách Bảo Mật: Ngay Cả Sếp Bạn Cũng Không Đọc Được",
+    "subtitle": "Bởi vì không giống như ông sếp độc hại, chúng tôi thực sự tôn trọng ranh giới",
+    "intro": "Ông sếp độc hại có thể đọc email của bạn, theo dõi màn hình và kiểm soát giờ giải lao, nhưng chúng tôi khác. Đây là cách chúng tôi bảo vệ dữ liệu của bạn khi bạn lên kế hoạch thoát khỏi địa ngục công sở.",
+    "dataCollection": {
+      "title": "Chúng Tôi Thu Thập Gì (Spoiler: Ít Hơn Sếp Bạn Nhiều)",
+      "subtitle": "Sếp bạn thu thập linh hồn. Chúng tôi chỉ thu thập thông tin cơ bản.",
+      "items": [
+        "Địa chỉ email (khi bạn cần mẹo sinh tồn của chúng tôi)",
+        "Khiếu nại về sếp (ẩn danh, vì chúng tôi không phải quái vật)",
+        "Dữ liệu sử dụng (để xem bài viết nào khiến bạn khóc nhiều nhất)",
+        "Cookie (loại kỹ thuật số, không phải loại sếp ăn cắp ở phòng giải lao)"
+      ]
+    },
+    "dataUse": {
+      "title": "Chúng Tôi Sử Dụng Thông Tin Như Thế Nào",
+      "subtitle": "Không giống sếp bạn, chúng tôi sử dụng có trách nhiệm",
+      "items": [
+        "Gửi cho bạn kế hoạch thoát hiểm và chiến lược sinh tồn",
+        "Cải thiện thuật toán phát hiện sếp độc hại",
+        "Tạo nội dung tốt hơn để xác nhận nỗi đau của bạn",
+        "Giúp nạn nhân khác nhận diện kẻ săn mồi tại nơi làm việc"
+      ]
+    },
+    "dataProtection": {
+      "title": "Chúng Tôi Bảo Vệ Dữ liệu Như Thế Nào",
+      "subtitle": "Bảo mật tốt hơn mật khẩu của sếp ('password123')",
+      "content": "Chúng tôi sử dụng mã hóa tiêu chuẩn ngành, máy chủ bảo mật, và thực sự quan tâm đến quyền riêng tư của bạn. Sếp độc hại của bạn có thể dùng cùng mật khẩu cho mọi thứ và để tài liệu mật trên máy in."
+    }
+  },
+  "terms": {
+    "title": "Điều Khoản Dịch Vụ: Hợp Đồng Mà Sếp Bạn Nên Đọc",
+    "subtitle": "Không giống như hợp đồng lao động của bạn, các điều khoản này công bằng và minh bạch",
+    "intro": "Chào mừng đến với HeyBoss.WTF, nơi chúng tôi đối xử với người dùng tốt hơn sếp đối xử với bạn. Bằng cách sử dụng trang web, bạn đồng ý với các điều khoản này (hợp lý hơn nhiều so với những gì sếp bắt bạn ký).",
+    "usage": {
+      "title": "Cách Sử Dụng Trang Web Này",
+      "subtitle": "Hướng dẫn rõ ràng hơn bất cứ thứ gì sếp từng đưa ra",
+      "items": [
+        "Chia sẻ câu chuyện về sếp độc hại (ẩn danh, vì chúng tôi không ngu)",
+        "Tìm kiếm cơ sở dữ liệu những kẻ phản diện nơi làm việc",
+        "Sử dụng chiến lược sinh tồn (tốt hơn nhiều so với 'cứ chịu đựng đi')",
+        "Không doxx bất kỳ ai (hãy tốt hơn sếp bạn)"
+      ]
+    },
+    "prohibited": {
+      "title": "Những Điều Không Nên Làm",
+      "subtitle": "Đừng giống như sếp độc hại của bạn",
+      "items": [
+        "Không đăng thông tin sai (việc nói dối để dành cho ban quản lý)",
+        "Không quấy rối người dùng khác (đó là việc của sếp bạn)",
+        "Không spam trang web (chúng tôi đã có đủ vấn đề rồi)",
+        "Không sử dụng để theo dõi thực sự (nghiêm túc, đừng làm vậy)"
+      ]
+    },
+    "disclaimer": {
+      "title": "Tuyên Bố Pháp Lý",
+      "subtitle": "Bởi vì luật sư bắt chúng tôi phải nói những điều này",
+      "content": "Trang web này chỉ mang tính chất thông tin. Chúng tôi không phải luật sư, nhà trị liệu, hay cố vấn nghề nghiệp (mặc dù có thể đưa ra lời khuyên tốt hơn sếp bạn). Luôn tham khảo chuyên gia cho các vấn đề nghiêm trọng tại nơi làm việc."
+    }
+  },
+  "contact": {
+    "title": "Liên Hệ: Chúng Tôi Thực Sự Phản Hồi (Không Giống Sếp Bạn)",
+    "subtitle": "Liên lạc với chúng tôi - chúng tôi hữu ích hơn HR",
+    "intro": "Cần liên lạc? Không giống sếp bạn, chúng tôi thực sự kiểm tra tin nhắn và phản hồi trong thời gian hợp lý. Không có 'chúng ta sẽ quay lại thảo luận' hay 'liên lạc sau nhé' vớ vẩn.",
+    "reasons": {
+      "title": "Lý Do Liên Hệ Với Chúng Tôi",
+      "items": [
+        "🚨 Báo cáo sếp độc hại mới cho cơ sở dữ liệu",
+        "💡 Gửi chiến lược sinh tồn thực sự hiệu quả",
+        "🐛 Báo lỗi (loại website, không phải lỗi trong tính cách sếp)",
+        "📰 Yêu cầu báo chí (đúng, sếp độc hại đáng tin tức)",
+        "🤝 Cơ hội hợp tác (nếu bạn đang chiến đấu cho điều tốt)",
+        "😭 Chỉ cần ai đó xác nhận nỗi đau của bạn"
+      ]
+    },
+    "methods": {
+      "title": "Cách Liên Lạc",
+      "email": {
+        "title": "Email",
+        "address": "hello@heyboss.wtf",
+        "note": "Chúng tôi phản hồi nhanh hơn sếp trở về từ cuộc họp 'nhanh'"
+      },
+      "response": {
+        "title": "Thời Gian Phản Hồi",
+        "content": "Chúng tôi phản hồi trong vòng 24-48 giờ. So sánh với sếp bạn mất 3 tuần để duyệt đơn nghỉ phép."
+      }
+    },
+    "tips": {
+      "title": "Mẹo Giao Tiếp Tốt Hơn",
+      "subtitle": "Không giống sếp bạn, chúng tôi đánh giá cao những điều này",
+      "items": [
+        "Cụ thể về vấn đề (chúng tôi không đọc được suy nghĩ như sếp nghĩ họ có thể)",
+        "Đính kèm ảnh chụp màn hình nếu báo lỗi (bằng chứng trực quan, không như 'phản hồi' của sếp)",
+        "Giữ ẩn danh khi chia sẻ câu chuyện sếp (chúng tôi bảo vệ người tố cáo)",
+        "Kiên nhẫn - giao tiếp tốt cần thời gian (khái niệm cách mạng, chúng tôi biết)"
+      ]
+    }
   },
   "common": {
     "languageSwitcher": "Ngôn ngữ"
