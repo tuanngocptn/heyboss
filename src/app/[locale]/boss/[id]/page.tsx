@@ -199,9 +199,12 @@ export default function BossProfile({ params }: { params: Promise<{ id: string }
             <div className="text-center lg:text-right w-full lg:w-auto">
               <div className="text-2xl md:text-3xl font-bold text-red-500 mb-1">{boss.totalReports}</div>
               <div className="text-sm md:text-base text-gray-400 mb-4">{t('boss.totalReports')}</div>
-              <button className="w-full lg:w-auto px-4 md:px-6 py-2 md:py-3 bg-red-600 text-white text-sm md:text-base font-semibold rounded-lg hover:bg-red-700 transition-colors cursor-pointer">
+              <Link
+                href="/report"
+                className="inline-block w-full lg:w-auto px-4 md:px-6 py-2 md:py-3 bg-red-600 text-white text-sm md:text-base font-semibold rounded-lg hover:bg-red-700 transition-colors cursor-pointer text-center"
+              >
                 {t('boss.reportButton')}
-              </button>
+              </Link>
             </div>
           </div>
         </div>

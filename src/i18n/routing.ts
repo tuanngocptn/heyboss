@@ -32,6 +32,10 @@ export const routing = defineRouting({
     '/contact': {
       en: '/contact',
       vi: '/lien-he'
+    },
+    '/report': {
+      en: '/report',
+      vi: '/bao-cao'
     }
   }
 });

@@ -1,0 +1,4 @@
+# This directory stores submitted toxic boss reports
+# Files are automatically generated with naming format:
+# {boss_name_sanitized}_{timestamp}.md
+# {boss_name_sanitized}_{timestamp}.pdf

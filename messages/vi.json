@@ -2,6 +2,7 @@
   "navigation": {
     "home": "HeyBoss.WTF",
     "directory": "Danh Sách Sếp",
+    "report": "Phanh Phui Sếp",
     "backToHome": "Về Trang Chủ",
     "backToDirectory": "Về Danh Sách"
   },
@@ -242,6 +243,87 @@
         "Giữ ẩn danh khi chia sẻ câu chuyện sếp (chúng tôi bảo vệ người tố cáo)",
         "Kiên nhẫn - giao tiếp tốt cần thời gian (khái niệm cách mạng, chúng tôi biết)"
       ]
+    }
+  },
+  "report": {
+    "title": "Báo Cáo Sếp Độc Hại: Đến Lúc Phanh Phui Kẻ Phản Diện Văn Phòng",
+    "subtitle": "Giúp chúng tôi xây dựng cơ sở dữ liệu toàn diện nhất về những kẻ săn mồi nơi làm việc",
+    "intro": "Có một ông sếp khiến Darth Vader trông như một người thầy quan tâm? Bạn đã đến đúng chỗ rồi. Hãy ghi lại hành vi độc hại của họ để người khác tránh được cơn ác mộng tương tự.",
+    "tutorial": {
+      "title": "Hướng Dẫn Viết Báo Cáo Sếp Chuẩn (Chỉ Dẫn Tối Thượng)",
+      "subtitle": "Vì những lời phàn nàn hời hợt sẽ không đủ sức - chúng ta cần câu chuyện độc hại đầy đủ",
+      "steps": [
+        {
+          "title": "📝 Cụ Thể, Không Phải Kịch Tính",
+          "content": "Thay vì 'Sếp tôi là ác quỷ,' hãy thử 'Sếp ép làm thêm giờ không trả lương, rồi chiếm công của chúng tôi trong họp ban lãnh đạo.' Cung cấp ngày tháng, ví dụ và bối cảnh."
+        },
+        {
+          "title": "🎯 Tập Trung Vào Mô Hình, Không Phải Sự Cố Đơn Lẻ",
+          "content": "Một ngày tồi tệ không tạo nên một sếp độc hại. Nhưng liên tục làm nhục nhân viên, thiên vị, hoặc tạo ra deadline bất khả thi? Đó mới là điều chúng ta cần."
+        },
+        {
+          "title": "📄 Bằng Chứng Là Tất Cả",
+          "content": "Có email? Ảnh chụp màn hình? Chính sách văn bản họ vi phạm? Hãy tải PDF lên! Không gì nói lên 'khiếu nại hợp lệ' bằng bằng chứng có tài liệu về sự tồi tệ của họ."
+        },
+        {
+          "title": "🕵️ Bảo Vệ Bản Thân",
+          "content": "Sử dụng email ẩn danh nếu bạn lo lắng. Chúng tôi bảo vệ người tố cáo, nhưng sếp bạn có lẽ thì không. Giữ an toàn khi đấu tranh vì điều đúng đắn."
+        },
+        {
+          "title": "💯 Càng Chi Tiết, Càng Tốt",
+          "content": "Hãy nghĩ như báo chí điều tra kết hợp với buổi trị liệu nơi làm việc. Điều gì khiến họ độc hại? Họ hoạt động như thế nào? Thiệt hại của họ đối với tinh thần đội nhóm ra sao?"
+        }
+      ]
+    },
+    "form": {
+      "personalInfo": "Thông Tin Của Bạn (Tùy Chọn - Ở Ẩn Danh Nếu Cần)",
+      "reporterEmail": "Email Của Bạn",
+      "reporterEmailPlaceholder": "nguoibao@email.com (cho câu hỏi theo dõi)",
+      "reporterEmailHelp": "Chúng tôi chỉ liên lạc khi cần làm rõ. Hứa là không phải HR đâu.",
+      "bossInfo": "Chi Tiết Về Kẻ Phản Diện",
+      "bossName": "Họ Tên Đầy Đủ Của Sếp",
+      "bossNamePlaceholder": "Nguyễn 'Quản Lý Vi Mô' Văn A",
+      "bossNameRequired": "Chúng ta cần biết đang đối phó với ai",
+      "bossCompany": "Tên Công Ty",
+      "bossCompanyPlaceholder": "Công Ty Evil Corp",
+      "bossPosition": "Chức Danh Của Họ",
+      "bossPositionPlaceholder": "Trưởng Phòng Hủy Hoại Ước Mơ",
+      "bossDepartment": "Phòng Ban",
+      "bossDepartmentPlaceholder": "Sales / Marketing / Bộ Phận Nghiền Nát Linh Hồn",
+      "bossAge": "Tuổi Ước Tính",
+      "bossAgeHelp": "Giúp xác định (tùy chọn)",
+      "workLocation": "Địa Điểm Văn Phòng",
+      "workLocationPlaceholder": "Hà Nội, Việt Nam / Địa Ngục Remote",
+      "evidenceSection": "Bằng Chứng",
+      "uploadPdf": "Tải Lên Bằng Chứng (PDF)",
+      "uploadPdfHelp": "Email, chính sách, ảnh chụp màn hình - bất cứ thứ gì chứng minh sự độc hại của họ",
+      "uploadButton": "Chọn Tệp PDF",
+      "reportDetails": "Câu Chuyện Đầy Đủ",
+      "reportContent": "Báo Cáo Chi Tiết",
+      "reportContentPlaceholder": "Kể hết cho chúng tôi: sự cố cụ thể, mô hình hành vi, tác động đến bạn và đồng nghiệp, ngày tháng nếu có thể. Càng chi tiết, chúng tôi càng giúp người khác tránh được người này...",
+      "reportContentRequired": "Chúng ta cần chi tiết để xây dựng một vụ án đàng hoàng",
+      "categories": "Các Loại Hành Vi Độc Hại (Chọn Tất Cả Phù Hợp)",
+      "categoryOptions": [
+        "Chiếm công của người khác",
+        "Quản lý vi mô mọi thứ",
+        "Làm nhục trước công chúng",
+        "Deadline bất khả thi",
+        "Thiên vị",
+        "Đổ lỗi cho người khác",
+        "Loại khỏi cuộc họp",
+        "Liên tục thay đổi yêu cầu",
+        "La hét hoặc hành vi hung hăng",
+        "Bình luận phân biệt đối xử",
+        "Vi phạm khác tại nơi làm việc"
+      ],
+      "captcha": "Chứng Minh Bạn Là Người (Không Phải Một Sếp Độc Hại Khác)",
+      "captchaDescription": "Hoàn thành kiểm tra bảo mật bên dưới để xác minh bạn không phải bot",
+      "captchaError": "Vui lòng hoàn thành xác minh bảo mật",
+      "submit": "PHANH PHUI SẾP ĐỘC HẠI NÀY",
+      "submitting": "Đang gửi vào Đại Sảnh Danh Tiếng Xấu...",
+      "success": "Báo Cáo Đã Được Gửi Thành Công!",
+      "successMessage": "Cảm ơn bạn đã giúp người khác tránh địa ngục nơi làm việc. Chúng tôi sẽ xem xét và thêm vào cơ sở dữ liệu những kẻ phản diện văn phòng.",
+      "error": "Có lỗi xảy ra. Ngay cả form của chúng tôi cũng đáng tin cậy hơn những lời hứa của sếp bạn."
     }
   },
   "common": {

@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack --port 3000",
-    "dev:fast": "next dev --turbopack --port 3000 --experimental-https",
+    "dev": "node --env-file=.env.dev node_modules/.bin/next dev --turbopack --port 3000",
+    "dev:fast": "node --env-file=.env.dev node_modules/.bin/next dev --turbopack --port 3000 --experimental-https",
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
     "lint:fix": "eslint --fix",
     "type-check": "tsc --noEmit",
-    "dev:watch": "next dev --turbopack --port 3000 --experimental-app-dir"
+    "dev:watch": "node --env-file=.env.dev node_modules/.bin/next dev --turbopack --port 3000 --experimental-app-dir"
   },
   "dependencies": {
     "next": "15.5.3",
@@ -24,6 +24,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^16.4.7",
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
     "tailwindcss": "^4",

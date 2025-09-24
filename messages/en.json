@@ -2,6 +2,7 @@
   "navigation": {
     "home": "HeyBoss.WTF",
     "directory": "Boss Directory",
+    "report": "Report Boss",
     "backToHome": "Back to Home",
     "backToDirectory": "Back to Directory"
   },
@@ -242,6 +243,87 @@
         "Stay anonymous if sharing boss stories (we protect whistleblowers)",
         "Be patient - good communication takes time (revolutionary concept, we know)"
       ]
+    }
+  },
+  "report": {
+    "title": "Report a Toxic Boss: Time to Expose the Office Villain",
+    "subtitle": "Help us build the world's most comprehensive database of workplace predators",
+    "intro": "Got a boss who makes Darth Vader look like a caring mentor? You've come to the right place. Let's document their toxic behavior so others can avoid the same nightmare.",
+    "tutorial": {
+      "title": "How to Nail Your Boss Report (The Ultimate Guide)",
+      "subtitle": "Because half-hearted complaints won't cut it - we need the full toxic story",
+      "steps": [
+        {
+          "title": "📝 Be Specific, Not Dramatic",
+          "content": "Instead of 'My boss is evil,' try 'Boss forces overtime without pay, then takes credit for our work during board meetings.' Give us dates, examples, and context."
+        },
+        {
+          "title": "🎯 Focus on Patterns, Not Single Incidents",
+          "content": "One bad day doesn't make a toxic boss. But consistently humiliating employees, playing favorites, or creating impossible deadlines? That's the good stuff we need."
+        },
+        {
+          "title": "📄 Evidence is Everything",
+          "content": "Got emails? Screenshots? Written policies they violate? Upload that PDF! Nothing says 'legitimate complaint' like documented proof of their awfulness."
+        },
+        {
+          "title": "🕵️ Protect Yourself",
+          "content": "Use an anonymous email if you're worried. We protect whistleblowers, but your boss probably doesn't. Stay safe while fighting the good fight."
+        },
+        {
+          "title": "💯 The More Detail, The Better",
+          "content": "Think investigative journalism meets workplace therapy session. What makes them toxic? How do they operate? What's their damage to team morale?"
+        }
+      ]
+    },
+    "form": {
+      "personalInfo": "Your Information (Optional - Stay Anonymous If Needed)",
+      "reporterEmail": "Your Email",
+      "reporterEmailPlaceholder": "reporter@email.com (for follow-up questions)",
+      "reporterEmailHelp": "We'll only contact you if we need clarification. Promise we're not HR.",
+      "bossInfo": "The Villain Details",
+      "bossName": "Boss Full Name",
+      "bossNamePlaceholder": "John 'The Micromanager' Smith",
+      "bossNameRequired": "We need to know who we're dealing with",
+      "bossCompany": "Company Name",
+      "bossCompanyPlaceholder": "Evil Corp Industries",
+      "bossPosition": "Their Job Title",
+      "bossPositionPlaceholder": "Senior Destroyer of Dreams",
+      "bossDepartment": "Department",
+      "bossDepartmentPlaceholder": "Sales / Marketing / Soul Crushing Division",
+      "bossAge": "Approximate Age",
+      "bossAgeHelp": "Helps with identification (optional)",
+      "workLocation": "Office Location",
+      "workLocationPlaceholder": "New York, NY / Remote Hell",
+      "evidenceSection": "The Receipts",
+      "uploadPdf": "Upload Evidence (PDF)",
+      "uploadPdfHelp": "Emails, policies, screenshots - anything that proves their toxicity",
+      "uploadButton": "Choose PDF File",
+      "reportDetails": "The Full Story",
+      "reportContent": "Detailed Report",
+      "reportContentPlaceholder": "Tell us everything: specific incidents, patterns of behavior, impact on you and colleagues, dates if possible. The more detail, the better we can help others avoid this person...",
+      "reportContentRequired": "We need the details to build a proper case",
+      "categories": "Types of Toxic Behavior (Check All That Apply)",
+      "categoryOptions": [
+        "Takes credit for others' work",
+        "Micromanages everything",
+        "Public humiliation",
+        "Impossible deadlines",
+        "Plays favorites",
+        "Blame shifting",
+        "Excludes from meetings",
+        "Constantly changes requirements",
+        "Yells or aggressive behavior",
+        "Discriminatory comments",
+        "Other workplace violations"
+      ],
+      "captcha": "Prove You're Human (Not Another Toxic Boss)",
+      "captchaDescription": "Complete the security check below to verify you're not a bot",
+      "captchaError": "Please complete the security verification",
+      "submit": "EXPOSE THIS TOXIC BOSS",
+      "submitting": "Sending to the Hall of Shame...",
+      "success": "Report Submitted Successfully!",
+      "successMessage": "Thanks for helping others avoid workplace hell. We'll review this and add it to our database of office villains.",
+      "error": "Something went wrong. Even our form is less reliable than your boss's promises."
     }
   },
   "common": {

@@ -65,6 +65,12 @@ export default function Footer() {
               >
                 {t('navigation.directory')}
               </Link>
+              <Link
+                href="/report"
+                className="block text-gray-300 hover:text-red-400 transition-all duration-300 text-base font-medium"
+              >
+                {t('navigation.report')}
+              </Link>
             </div>
           </div>
 
