@@ -1,13 +1,19 @@
 'use client';
 import {useTranslations} from 'next-intl';
-import {Link} from '@/i18n/routing';
+import {Link, useRouter} from '@/i18n/routing';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Footer from '@/components/Footer';
 import Turnstile from '@/components/Turnstile';
 import { useState } from 'react';
 
+interface TutorialStep {
+  title: string;
+  content: string;
+}
+
 export default function ReportPage() {
   const t = useTranslations();
+  const router = useRouter();
 
   // Form state
   const [reporterEmail, setReporterEmail] = useState('');
@@ -101,19 +107,8 @@ export default function ReportPage() {
       });
 
       if (response.ok) {
-        setSubmitStatus('success');
-        // Reset form
-        setReporterEmail('');
-        setBossName('');
-        setBossCompany('');
-        setBossPosition('');
-        setBossDepartment('');
-        setBossAge('');
-        setWorkLocation('');
-        setReportContent('');
-        setCategories([]);
-        setPdfFile(null);
-        setTurnstileToken('');
+        // Redirect to success page instead of showing inline message
+        router.push('/report/success');
       } else {
         setSubmitStatus('error');
       }
@@ -170,7 +165,7 @@ export default function ReportPage() {
           </p>
 
           <div className="space-y-6">
-            {t.raw('report.tutorial.steps').map((step: any, index: number) => (
+            {t.raw('report.tutorial.steps').map((step: TutorialStep, index: number) => (
               <div key={index} className="bg-gray-800/50 rounded-lg p-6 border border-gray-600/20">
                 <h3 className="text-lg font-semibold mb-3 text-green-400">
                   {step.title}

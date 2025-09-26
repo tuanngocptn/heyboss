@@ -326,6 +326,42 @@
       "error": "Có lỗi xảy ra. Ngay cả form của chúng tôi cũng đáng tin cậy hơn những lời hứa của sếp bạn."
     }
   },
+  "reportSuccess": {
+    "title": "NHIỆM VỤ HOÀN THÀNH!",
+    "subtitle": "Sếp độc hại của bạn đã chính thức bị phanh phui",
+    "congratulations": "🎉 Chúc Mừng, Chiến Binh Nơi Làm Việc! 🎉",
+    "message1": "Bạn vừa thực hiện bước quan trọng nhất trong việc chống lại sự độc hại nơi làm việc. Lòng can đảm lên tiếng của bạn sẽ giúp vô số người khác tránh khỏi cơn ác mộng tương tự.",
+    "message2": "Báo cáo của bạn giờ đã có trong cơ sở dữ liệu những kẻ săn mồi nơi làm việc, và chúng tôi đã gửi gói bằng chứng cho đội ngũ xem xét.",
+    "message3": "Bạn chính thức là một anh hùng nơi làm việc. Ông sếp độc hại đó không biết điều gì đã xảy ra với họ!",
+    "whatNext": {
+      "title": "Điều Gì Sẽ Xảy Ra Tiếp Theo?",
+      "step1": {
+        "title": "Xem Xét & Xác Minh",
+        "description": "Đội ngũ của chúng tôi xem xét báo cáo và bằng chứng để đảm bảo tính chính xác và đầy đủ."
+      },
+      "step2": {
+        "title": "Thêm Vào Cơ Sở Dữ Liệu",
+        "description": "Sếp của bạn sẽ được thêm vào thư mục công khai những quản lý độc hại để người khác có thể thấy."
+      },
+      "step3": {
+        "title": "Cảnh Báo Cộng Đồng",
+        "description": "Những nạn nhân tiềm năng khác giờ có thể tìm kiếm và thấy cảnh báo về sếp độc hại của bạn."
+      },
+      "step4": {
+        "title": "Theo Dõi Liên Tục",
+        "description": "Chúng tôi theo dõi các mô hình và cập nhật hồ sơ khi có thêm báo cáo về cùng một sếp."
+      }
+    },
+    "actions": {
+      "viewDirectory": "Duyệt Thư Mục Sếp",
+      "reportAnother": "Báo Cáo Sếp Khác"
+    },
+    "disclaimer": "Tất cả báo cáo đều được xem xét về độ chính xác. Chúng tôi bảo vệ tính ẩn danh của người tố cáo trong khi phanh phui sự độc hại nơi làm việc.",
+    "quote": {
+      "text": "Điều duy nhất cần thiết để cái ác chiến thắng là những người tốt không làm gì cả.",
+      "author": "Edmund Burke (nhưng áp dụng cho những sếp độc hại)"
+    }
+  },
   "common": {
     "languageSwitcher": "Ngôn ngữ"
   }

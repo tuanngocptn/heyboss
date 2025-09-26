@@ -36,6 +36,10 @@ export const routing = defineRouting({
     '/report': {
       en: '/report',
       vi: '/bao-cao'
+    },
+    '/report/success': {
+      en: '/report/success',
+      vi: '/bao-cao/thanh-cong'
     }
   }
 });

@@ -326,6 +326,42 @@
       "error": "Something went wrong. Even our form is less reliable than your boss's promises."
     }
   },
+  "reportSuccess": {
+    "title": "MISSION ACCOMPLISHED!",
+    "subtitle": "Your toxic boss has been officially exposed",
+    "congratulations": "🎉 Congratulations, Workplace Warrior! 🎉",
+    "message1": "You just took the most important step in fighting workplace toxicity. Your courage to speak up will help countless others avoid the same nightmare.",
+    "message2": "Your report is now in our database of workplace predators, and we've sent the evidence package to our review team.",
+    "message3": "You're officially a workplace hero. That toxic boss doesn't know what hit them!",
+    "whatNext": {
+      "title": "What Happens Next?",
+      "step1": {
+        "title": "Review & Verification",
+        "description": "Our team reviews your report and evidence to ensure accuracy and completeness."
+      },
+      "step2": {
+        "title": "Database Addition",
+        "description": "Your boss gets added to our public directory of toxic managers for others to see."
+      },
+      "step3": {
+        "title": "Community Alert",
+        "description": "Other potential victims can now search and find warnings about your toxic boss."
+      },
+      "step4": {
+        "title": "Ongoing Monitoring",
+        "description": "We track patterns and update profiles as more reports come in about the same boss."
+      }
+    },
+    "actions": {
+      "viewDirectory": "Browse Boss Directory",
+      "reportAnother": "Report Another Boss"
+    },
+    "disclaimer": "All reports are reviewed for accuracy. We protect whistleblower anonymity while exposing workplace toxicity.",
+    "quote": {
+      "text": "The only thing necessary for the triumph of evil is for good people to do nothing.",
+      "author": "Edmund Burke (but applied to toxic bosses)"
+    }
+  },
   "common": {
     "languageSwitcher": "Language"
   }
