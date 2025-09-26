@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
+import { writeFile, unlink } from 'fs/promises';
 import { join } from 'path';
+import JSZip from 'jszip';
 
 export async function POST(request: NextRequest) {
   try {
@@ -105,7 +106,7 @@ ${reportData.reportContent}
     // Send to Telegram
     const telegramBotToken = process.env.TELEGRAM_BOT_TOKEN;
     const telegramChatId = process.env.TELEGRAM_CHAT_ID || '-1003147773870';
-    const telegramTopicId = process.env.TELEGRAM_TOPIC_ID || '5';
+    const telegramTopicId = process.env.TELEGRAM_TOPIC_ID || '3';
 
     if (!telegramBotToken) {
       console.error('TELEGRAM_BOT_TOKEN environment variable is not set');
@@ -117,8 +118,32 @@ ${reportData.reportContent}
       return NextResponse.json({ error: 'Configuration error' }, { status: 500 });
     }
 
-    // Prepare Telegram message
-    const telegramMessage = `🚨 **NEW TOXIC BOSS REPORT** 🚨
+    // Skip sending separate message - will only send zip file with caption
+
+    // Create zip file with markdown and PDF (if exists)
+    try {
+      const zip = new JSZip();
+
+      // Add markdown file to zip
+      zip.file(markdownFileName, markdownContent);
+
+      // Add PDF file to zip if it exists
+      if (pdfFile) {
+        const pdfBuffer = Buffer.from(await pdfFile.arrayBuffer());
+        zip.file(pdfFileName, pdfBuffer);
+      }
+
+      // Generate zip file
+      const zipBuffer = await zip.generateAsync({ type: 'nodebuffer' });
+      const zipFileName = `${bossNameForFile}_${timestamp}.zip`;
+      const zipBlob = new Blob([new Uint8Array(zipBuffer)], { type: 'application/zip' });
+
+      // Send zip file to Telegram
+      const zipFormData = new FormData();
+      zipFormData.append('chat_id', telegramChatId);
+      zipFormData.append('message_thread_id', telegramTopicId);
+      zipFormData.append('document', zipBlob, zipFileName);
+      const zipCaption = `🚨 **NEW TOXIC BOSS REPORT** 🚨
 
 **Boss:** ${reportData.bossName}
 **Company:** ${reportData.bossCompany}
@@ -131,74 +156,42 @@ ${reportData.categories}
 **Location:** ${reportData.workLocation}
 **Reporter Email:** ${reportData.reporterEmail}
 
-**Report Summary:**
-${reportData.reportContent.length > 500 ?
-  reportData.reportContent.substring(0, 500) + '...' :
-  reportData.reportContent}
-
-📄 **Files:**
-- Markdown: \`${markdownFileName}\`
-${pdfFile ? `- PDF Evidence: \`${pdfFileName}\`` : '- No PDF evidence uploaded'}
-
 🕐 **Submitted:** ${new Date().toLocaleString()}
-`;
 
-    // Send message to Telegram
-    const telegramUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
-    const telegramResponse = await fetch(telegramUrl, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        chat_id: telegramChatId,
-        message_thread_id: telegramTopicId,
-        text: telegramMessage,
-        parse_mode: 'Markdown',
-      }),
-    });
+📄 **Zip Package:** \`${zipFileName}\`
+${pdfFile ? '- Contains: Detailed report + PDF evidence' : '- Contains: Detailed report only'}`;
 
-    if (!telegramResponse.ok) {
-      const telegramError = await telegramResponse.text();
-      console.error('Telegram API error:', telegramError);
-      // Continue anyway - we don't want to fail the submission if Telegram is down
-    }
-
-    // Send PDF file to Telegram if it exists
-    if (pdfFile) {
-      const formDataForTelegram = new FormData();
-      formDataForTelegram.append('chat_id', telegramChatId);
-      formDataForTelegram.append('message_thread_id', telegramTopicId);
-      formDataForTelegram.append('document', pdfFile, pdfFileName);
-      formDataForTelegram.append('caption', `Evidence for ${reportData.bossName} report`);
+      zipFormData.append('caption', zipCaption);
 
       const telegramDocUrl = `https://api.telegram.org/bot${telegramBotToken}/sendDocument`;
-      try {
-        await fetch(telegramDocUrl, {
-          method: 'POST',
-          body: formDataForTelegram,
-        });
-      } catch (error) {
-        console.error('Failed to send PDF to Telegram:', error);
-      }
-    }
-
-    // Send markdown file to Telegram
-    try {
-      const markdownBlob = new Blob([markdownContent], { type: 'text/markdown' });
-      const markdownFormData = new FormData();
-      markdownFormData.append('chat_id', telegramChatId);
-      markdownFormData.append('message_thread_id', telegramTopicId);
-      markdownFormData.append('document', markdownBlob, markdownFileName);
-      markdownFormData.append('caption', `Full report for ${reportData.bossName}`);
-
-      const telegramDocUrl = `https://api.telegram.org/bot${telegramBotToken}/sendDocument`;
-      await fetch(telegramDocUrl, {
+      const zipResponse = await fetch(telegramDocUrl, {
         method: 'POST',
-        body: markdownFormData,
+        body: zipFormData,
       });
+
+      if (!zipResponse.ok) {
+        const zipError = await zipResponse.text();
+        console.error('Zip send failed:', zipError);
+      } else {
+        console.log('Zip file sent successfully to Telegram');
+
+        // Clean up files from reports folder after successful send
+        try {
+          await unlink(markdownPath);
+          console.log('Markdown file deleted from reports folder');
+
+          if (pdfFile && pdfFileName) {
+            const pdfPath = join(process.cwd(), 'reports', pdfFileName);
+            await unlink(pdfPath);
+            console.log('PDF file deleted from reports folder');
+          }
+        } catch (cleanupError) {
+          console.log('Could not clean up files from reports folder:', cleanupError);
+          // Don't fail the request if cleanup fails
+        }
+      }
     } catch (error) {
-      console.error('Failed to send markdown to Telegram:', error);
+      console.error('Failed to create or send zip file to Telegram:', error);
     }
 
     return NextResponse.json({
@@ -206,7 +199,8 @@ ${pdfFile ? `- PDF Evidence: \`${pdfFileName}\`` : '- No PDF evidence uploaded'}
       message: 'Report submitted successfully',
       files: {
         markdown: markdownFileName,
-        pdf: pdfFileName || null
+        pdf: pdfFileName || null,
+        zip: `${bossNameForFile}_${timestamp}.zip`
       }
     });
 
