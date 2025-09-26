@@ -1,9 +1,7 @@
 {
-  "domains": ["heyboss.wtf"],
   "functions": {
     "src/app/api/report-boss/route.ts": {
       "maxDuration": 30
     }
-  },
-  "regions": ["iad1"]
+  }
 }
