@@ -97,7 +97,7 @@ model ToxicBoss {
   bossCompany    String?
   bossPosition   String?
   bossDepartment String?
-  bossAge        Int?
+  bornYear       Int?
   workLocation   String?
 
   // Reporter Information

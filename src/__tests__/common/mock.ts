@@ -81,7 +81,7 @@ export const mockReportData = {
   bossCompany: "Test Evil Corp",
   bossPosition: "Test Manager",
   bossDepartment: "Test IT",
-  bossAge: "45",
+  bornYear: "1980",
   workLocation: "Test New York",
   reporterEmail: "test-reporter@example.com",
   reportContent: "This test boss is very toxic and abusive",

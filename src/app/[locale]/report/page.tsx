@@ -5,75 +5,99 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Footer from '@/components/Footer';
 import Turnstile from '@/components/Turnstile';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 
 interface TutorialStep {
   title: string;
   content: string;
 }
 
+// Validation schema
+const createFormSchema = (t: (key: string) => string) => z.object({
+  reporterEmail: z.string().optional().refine((val) => !val || z.string().email().safeParse(val).success, {
+    message: t('report.form.invalidEmail'),
+  }),
+  bossName: z.string().min(1, t('report.form.bossNameRequired')),
+  bossCompany: z.string().optional(),
+  bossPosition: z.string().optional(),
+  bossDepartment: z.string().optional(),
+  bornYear: z.string().optional(),
+  workLocation: z.string().optional(),
+  reportContent: z.string().min(10, t('report.form.reportContentRequired')),
+  categories: z.array(z.string()).min(1, t('report.form.categoriesRequired')),
+  pdfFile: z.instanceof(File, { message: t('report.form.pdfRequired') }),
+  turnstileToken: z.string().optional(),
+});
+
+type FormData = z.infer<ReturnType<typeof createFormSchema>>;
+
 export default function ReportPage() {
   const t = useTranslations();
   const router = useRouter();
-
-  // Form state
-  const [reporterEmail, setReporterEmail] = useState('');
-  const [bossName, setBossName] = useState('');
-  const [bossCompany, setBossCompany] = useState('');
-  const [bossPosition, setBossPosition] = useState('');
-  const [bossDepartment, setBossDepartment] = useState('');
-  const [bossAge, setBossAge] = useState('');
-  const [workLocation, setWorkLocation] = useState('');
-  const [reportContent, setReportContent] = useState('');
-  const [categories, setCategories] = useState<string[]>([]);
-  const [pdfFile, setPdfFile] = useState<File | null>(null);
-  const [turnstileToken, setTurnstileToken] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Environment check
   const isProduction = process.env.NODE_ENV === 'production';
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
+  // Form schema with translations
+  const formSchema = createFormSchema(t);
+
+  // React Hook Form setup
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<FormData>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      reporterEmail: '',
+      bossName: '',
+      bossCompany: '',
+      bossPosition: '',
+      bossDepartment: '',
+      bornYear: '',
+      workLocation: '',
+      reportContent: '',
+      categories: [],
+      turnstileToken: '',
+    },
+  });
+
+  // Watch form values
+  const watchedCategories = watch('categories');
+  const watchedPdfFile = watch('pdfFile');
+
   // Handle category checkbox changes
   const handleCategoryChange = (category: string) => {
-    setCategories(prev =>
-      prev.includes(category)
-        ? prev.filter(c => c !== category)
-        : [...prev, category]
-    );
+    const currentCategories = watchedCategories || [];
+    const updatedCategories = currentCategories.includes(category)
+      ? currentCategories.filter(c => c !== category)
+      : [...currentCategories, category];
+    setValue('categories', updatedCategories);
   };
 
   // Handle PDF file upload
   const handlePdfUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file && file.type === 'application/pdf') {
-      setPdfFile(file);
-    } else {
+      setValue('pdfFile', file);
+    } else if (file) {
       alert('Please upload a PDF file only');
+      setValue('pdfFile', undefined as unknown as File);
     }
   };
 
   // Handle form submission
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Validate required fields
-    if (!bossName.trim()) {
-      alert(t('report.form.bossNameRequired'));
-      return;
-    }
-
-    if (!reportContent.trim()) {
-      alert(t('report.form.reportContentRequired'));
-      return;
-    }
-
+  const onSubmit = async (data: FormData) => {
     // Validate Turnstile (skip in development)
-    if (isProduction && !turnstileToken) {
+    if (isProduction && !data.turnstileToken) {
       alert(t('report.form.captchaError'));
       return;
     }
-
-    setIsSubmitting(true);
 
     try {
       // Create FormData for file upload
@@ -81,24 +105,21 @@ export default function ReportPage() {
 
       // Add form fields
       const reportData = {
-        reporterEmail: reporterEmail || 'Anonymous',
-        bossName: bossName.trim(),
-        bossCompany: bossCompany.trim() || 'Not specified',
-        bossPosition: bossPosition.trim() || 'Not specified',
-        bossDepartment: bossDepartment.trim() || 'Not specified',
-        bossAge: bossAge.trim() || 'Not specified',
-        workLocation: workLocation.trim() || 'Not specified',
-        reportContent: reportContent.trim(),
-        categories: categories.join(', ') || 'Not specified',
+        reporterEmail: data.reporterEmail || 'Anonymous',
+        bossName: data.bossName.trim(),
+        bossCompany: data.bossCompany?.trim() || 'Not specified',
+        bossPosition: data.bossPosition?.trim() || 'Not specified',
+        bossDepartment: data.bossDepartment?.trim() || 'Not specified',
+        bornYear: data.bornYear?.trim() || 'Not specified',
+        workLocation: data.workLocation?.trim() || 'Not specified',
+        reportContent: data.reportContent.trim(),
+        categories: data.categories.join(', ') || 'Not specified',
         submissionDate: new Date().toISOString(),
       };
 
       formData.append('reportData', JSON.stringify(reportData));
-      formData.append('turnstileToken', turnstileToken);
-
-      if (pdfFile) {
-        formData.append('pdfFile', pdfFile);
-      }
+      formData.append('turnstileToken', data.turnstileToken || '');
+      formData.append('pdfFile', data.pdfFile);
 
       // Submit to API endpoint
       const response = await fetch('/api/report-boss', {
@@ -115,8 +136,6 @@ export default function ReportPage() {
     } catch (error) {
       console.error('Submission error:', error);
       setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
     }
   };
 
@@ -202,7 +221,7 @@ export default function ReportPage() {
         )}
 
         {/* Report Form */}
-        <form onSubmit={handleSubmit} className="space-y-8">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
           {/* Reporter Information */}
           <div className="bg-gray-800 rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-semibold mb-6 text-blue-400">
@@ -214,13 +233,21 @@ export default function ReportPage() {
                 {t('report.form.reporterEmail')}
               </label>
               <input
+                {...register('reporterEmail')}
                 type="email"
                 id="reporterEmail"
-                value={reporterEmail}
-                onChange={(e) => setReporterEmail(e.target.value)}
                 placeholder={t('report.form.reporterEmailPlaceholder')}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-red-500 focus:outline-none"
+                className={`w-full px-4 py-3 bg-gray-700 border rounded-lg text-white placeholder-gray-400 focus:outline-none ${
+                  errors.reporterEmail
+                    ? 'border-red-500 focus:border-red-500'
+                    : 'border-gray-600 focus:border-red-500'
+                }`}
               />
+              {errors.reporterEmail && (
+                <p className="text-sm text-red-400 mt-2">
+                  ⚠ {errors.reporterEmail.message}
+                </p>
+              )}
               <p className="text-sm text-gray-400 mt-2">
                 {t('report.form.reporterEmailHelp')}
               </p>
@@ -239,14 +266,21 @@ export default function ReportPage() {
                   {t('report.form.bossName')} *
                 </label>
                 <input
+                  {...register('bossName')}
                   type="text"
                   id="bossName"
-                  required
-                  value={bossName}
-                  onChange={(e) => setBossName(e.target.value)}
                   placeholder={t('report.form.bossNamePlaceholder')}
-                  className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-red-500 focus:outline-none"
+                  className={`w-full px-4 py-3 bg-gray-700 border rounded-lg text-white placeholder-gray-400 focus:outline-none ${
+                    errors.bossName
+                      ? 'border-red-500 focus:border-red-500'
+                      : 'border-gray-600 focus:border-red-500'
+                  }`}
                 />
+                {errors.bossName && (
+                  <p className="text-sm text-red-400 mt-2">
+                    ⚠ {errors.bossName.message}
+                  </p>
+                )}
               </div>
 
               <div>
@@ -254,10 +288,9 @@ export default function ReportPage() {
                   {t('report.form.bossCompany')}
                 </label>
                 <input
+                  {...register('bossCompany')}
                   type="text"
                   id="bossCompany"
-                  value={bossCompany}
-                  onChange={(e) => setBossCompany(e.target.value)}
                   placeholder={t('report.form.bossCompanyPlaceholder')}
                   className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-red-500 focus:outline-none"
                 />
@@ -268,10 +301,9 @@ export default function ReportPage() {
                   {t('report.form.bossPosition')}
                 </label>
                 <input
+                  {...register('bossPosition')}
                   type="text"
                   id="bossPosition"
-                  value={bossPosition}
-                  onChange={(e) => setBossPosition(e.target.value)}
                   placeholder={t('report.form.bossPositionPlaceholder')}
                   className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-red-500 focus:outline-none"
                 />
@@ -282,29 +314,29 @@ export default function ReportPage() {
                   {t('report.form.bossDepartment')}
                 </label>
                 <input
+                  {...register('bossDepartment')}
                   type="text"
                   id="bossDepartment"
-                  value={bossDepartment}
-                  onChange={(e) => setBossDepartment(e.target.value)}
                   placeholder={t('report.form.bossDepartmentPlaceholder')}
                   className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-red-500 focus:outline-none"
                 />
               </div>
 
               <div>
-                <label htmlFor="bossAge" className="block text-sm font-medium text-gray-300 mb-2">
-                  {t('report.form.bossAge')}
+                <label htmlFor="bornYear" className="block text-sm font-medium text-gray-300 mb-2">
+                  {t('report.form.devilBornYear')}
                 </label>
                 <input
-                  type="text"
-                  id="bossAge"
-                  value={bossAge}
-                  onChange={(e) => setBossAge(e.target.value)}
-                  placeholder="45-50"
+                  {...register('bornYear')}
+                  type="number"
+                  id="bornYear"
+                  placeholder="1980"
+                  min="1930"
+                  max="2010"
                   className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-red-500 focus:outline-none"
                 />
                 <p className="text-sm text-gray-400 mt-2">
-                  {t('report.form.bossAgeHelp')}
+                  {t('report.form.devilBornYearHelp')}
                 </p>
               </div>
 
@@ -313,10 +345,9 @@ export default function ReportPage() {
                   {t('report.form.workLocation')}
                 </label>
                 <input
+                  {...register('workLocation')}
                   type="text"
                   id="workLocation"
-                  value={workLocation}
-                  onChange={(e) => setWorkLocation(e.target.value)}
                   placeholder={t('report.form.workLocationPlaceholder')}
                   className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-red-500 focus:outline-none"
                 />
@@ -332,21 +363,30 @@ export default function ReportPage() {
 
             <div>
               <label htmlFor="pdfUpload" className="block text-sm font-medium text-gray-300 mb-2">
-                {t('report.form.uploadPdf')}
+                {t('report.form.uploadPdf')} *
               </label>
               <input
                 type="file"
                 id="pdfUpload"
                 accept=".pdf"
                 onChange={handlePdfUpload}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-700 file:cursor-pointer cursor-pointer"
+                className={`w-full px-4 py-3 bg-gray-700 rounded-lg text-white file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-red-600 file:text-white hover:file:bg-red-700 file:cursor-pointer cursor-pointer border-2 ${
+                  errors.pdfFile
+                    ? 'border-red-500 focus:border-red-500'
+                    : 'border-gray-600 focus:border-red-500'
+                }`}
               />
               <p className="text-sm text-gray-400 mt-2">
                 {t('report.form.uploadPdfHelp')}
               </p>
-              {pdfFile && (
+              {errors.pdfFile && (
+                <p className="text-sm text-red-400 mt-2">
+                  ⚠ {errors.pdfFile.message}
+                </p>
+              )}
+              {watchedPdfFile && (
                 <p className="text-sm text-green-400 mt-2">
-                  ✓ File uploaded: {pdfFile.name}
+                  ✓ File uploaded: {watchedPdfFile.name}
                 </p>
               )}
             </div>
@@ -363,7 +403,7 @@ export default function ReportPage() {
                 <label key={index} className="flex items-center space-x-3 cursor-pointer hover:bg-gray-700/50 p-3 rounded-lg">
                   <input
                     type="checkbox"
-                    checked={categories.includes(category)}
+                    checked={watchedCategories?.includes(category) || false}
                     onChange={() => handleCategoryChange(category)}
                     className="w-5 h-5 text-red-600 bg-gray-700 border-gray-600 rounded focus:ring-red-500 cursor-pointer"
                   />
@@ -371,6 +411,11 @@ export default function ReportPage() {
                 </label>
               ))}
             </div>
+            {errors.categories && (
+              <p className="text-sm text-red-400 mt-4">
+                ⚠ {errors.categories.message}
+              </p>
+            )}
           </div>
 
           {/* Report Details */}
@@ -384,14 +429,21 @@ export default function ReportPage() {
                 {t('report.form.reportContent')} *
               </label>
               <textarea
+                {...register('reportContent')}
                 id="reportContent"
-                required
-                value={reportContent}
-                onChange={(e) => setReportContent(e.target.value)}
                 placeholder={t('report.form.reportContentPlaceholder')}
                 rows={8}
-                className="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:border-red-500 focus:outline-none resize-vertical"
+                className={`w-full px-4 py-3 bg-gray-700 border rounded-lg text-white placeholder-gray-400 focus:outline-none resize-vertical ${
+                  errors.reportContent
+                    ? 'border-red-500 focus:border-red-500'
+                    : 'border-gray-600 focus:border-red-500'
+                }`}
               />
+              {errors.reportContent && (
+                <p className="text-sm text-red-400 mt-2">
+                  ⚠ {errors.reportContent.message}
+                </p>
+              )}
             </div>
           </div>
 
@@ -408,9 +460,9 @@ export default function ReportPage() {
               {isProduction && (
                 <div className="flex justify-center">
                   <Turnstile
-                    onVerify={(token) => setTurnstileToken(token)}
-                    onError={() => setTurnstileToken('')}
-                    onExpire={() => setTurnstileToken('')}
+                    onVerify={(token) => setValue('turnstileToken', token)}
+                    onError={() => setValue('turnstileToken', '')}
+                    onExpire={() => setValue('turnstileToken', '')}
                     theme="dark"
                     size="normal"
                   />

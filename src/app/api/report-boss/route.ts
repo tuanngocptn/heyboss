@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
 - **Company:** ${reportData.bossCompany}
 - **Position:** ${reportData.bossPosition}
 - **Department:** ${reportData.bossDepartment}
-- **Age:** ${reportData.bossAge}
+- **Born Year:** ${reportData.bornYear}
 - **Location:** ${reportData.workLocation}
 
 ## Types of Toxic Behavior
@@ -122,6 +122,7 @@ ${reportData.reportContent}
 **Company:** ${reportData.bossCompany}
 **Position:** ${reportData.bossPosition}
 **Department:** ${reportData.bossDepartment}
+**Born Year:** ${reportData.bornYear}
 
 **Behavior Categories:**
 ${reportData.categories}
@@ -162,7 +163,7 @@ ${reportData.categories}
               bossCompany: reportData.bossCompany,
               bossPosition: reportData.bossPosition,
               bossDepartment: reportData.bossDepartment,
-              bossAge: reportData.bossAge ? parseInt(reportData.bossAge) || null : null,
+              bornYear: reportData.bornYear ? parseInt(reportData.bornYear) || null : null,
               workLocation: reportData.workLocation,
               reporterEmail: reportData.reporterEmail,
               reportContent: reportData.reportContent,

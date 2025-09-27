@@ -7,7 +7,7 @@ CREATE TABLE "public"."toxic_bosses" (
     "bossCompany" TEXT,
     "bossPosition" TEXT,
     "bossDepartment" TEXT,
-    "bossAge" INTEGER,
+    "bornYear" INTEGER,
     "workLocation" TEXT,
     "reporterEmail" TEXT,
     "reportContent" TEXT NOT NULL,
