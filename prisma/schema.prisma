@@ -110,7 +110,6 @@ model ToxicBoss {
   // File Paths (stored as URI paths)
   markdownPath String? // Path to markdown file
   pdfPath      String? // Path to PDF evidence file
-  zipPath      String? // Path to zip package
 
   // Metadata
   submissionDate DateTime

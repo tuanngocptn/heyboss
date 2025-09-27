@@ -14,7 +14,6 @@ CREATE TABLE "public"."toxic_bosses" (
     "categories" TEXT[],
     "markdownPath" TEXT,
     "pdfPath" TEXT,
-    "zipPath" TEXT,
     "locked" BOOLEAN NOT NULL DEFAULT false,
     "submissionDate" TIMESTAMP(3) NOT NULL,
     "verified" BOOLEAN NOT NULL DEFAULT false,

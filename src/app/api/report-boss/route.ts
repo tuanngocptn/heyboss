@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, unlink } from 'fs/promises';
-import { join } from 'path';
-import JSZip from 'jszip';
 import { prisma } from '@/lib/db';
+import { uploadToR2, generateFileName } from '@/lib/r2';
 
 export async function POST(request: NextRequest) {
   try {
@@ -49,8 +47,10 @@ export async function POST(request: NextRequest) {
     }
 
     const reportData = JSON.parse(reportDataStr);
-    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const bossNameForFile = reportData.bossName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+
+    // Generate new filename format: YYMMDDHHSS_full_name
+    const markdownFileName = generateFileName(reportData.bossName, 'md');
+    const pdfFileName = pdfFile ? generateFileName(reportData.bossName, 'pdf') : '';
 
     // Create markdown content
     const markdownContent = `# Toxic Boss Report: ${reportData.bossName}
@@ -76,32 +76,27 @@ ${reportData.reportContent}
 
 ---
 *Report submitted via HeyBoss.WTF*
-*Submission ID: ${timestamp}*
 `;
 
-    // Save markdown file (in production, you'd save to cloud storage)
-    const markdownFileName = `${bossNameForFile}_${timestamp}.md`;
-    const markdownPath = join(process.cwd(), 'reports', markdownFileName);
+    // Upload files to Cloudflare R2
+    let markdownUrl = '';
+    let pdfUrl = '';
 
     try {
-      await writeFile(markdownPath, markdownContent, 'utf-8');
-    } catch (error) {
-      console.log('Could not save markdown file locally:', error);
-      // Continue with Telegram submission even if local save fails
-    }
+      // Upload markdown to R2
+      const markdownBuffer = Buffer.from(markdownContent, 'utf-8');
+      markdownUrl = await uploadToR2(markdownFileName, markdownBuffer, 'text/markdown');
+      console.log('Markdown uploaded to R2:', markdownUrl);
 
-    // Handle PDF file if uploaded
-    let pdfFileName = '';
-    if (pdfFile) {
-      pdfFileName = `${bossNameForFile}_${timestamp}.pdf`;
-      const pdfPath = join(process.cwd(), 'reports', pdfFileName);
-
-      try {
-        const buffer = Buffer.from(await pdfFile.arrayBuffer());
-        await writeFile(pdfPath, buffer);
-      } catch (error) {
-        console.log('Could not save PDF file locally:', error);
+      // Upload PDF to R2 if exists
+      if (pdfFile) {
+        const pdfBuffer = Buffer.from(await pdfFile.arrayBuffer());
+        pdfUrl = await uploadToR2(pdfFileName, pdfBuffer, 'application/pdf');
+        console.log('PDF uploaded to R2:', pdfUrl);
       }
+    } catch (error) {
+      console.error('Failed to upload files to R2:', error);
+      return NextResponse.json({ error: 'File upload failed' }, { status: 500 });
     }
 
     // Send to Telegram
@@ -119,32 +114,9 @@ ${reportData.reportContent}
       return NextResponse.json({ error: 'Configuration error' }, { status: 500 });
     }
 
-    // Skip sending separate message - will only send zip file with caption
-
-    // Create zip file with markdown and PDF (if exists)
+    // Send message with R2 file links to Telegram
     try {
-      const zip = new JSZip();
-
-      // Add markdown file to zip
-      zip.file(markdownFileName, markdownContent);
-
-      // Add PDF file to zip if it exists
-      if (pdfFile) {
-        const pdfBuffer = Buffer.from(await pdfFile.arrayBuffer());
-        zip.file(pdfFileName, pdfBuffer);
-      }
-
-      // Generate zip file
-      const zipBuffer = await zip.generateAsync({ type: 'nodebuffer' });
-      const zipFileName = `${bossNameForFile}_${timestamp}.zip`;
-      const zipBlob = new Blob([new Uint8Array(zipBuffer)], { type: 'application/zip' });
-
-      // Send zip file to Telegram
-      const zipFormData = new FormData();
-      zipFormData.append('chat_id', telegramChatId);
-      zipFormData.append('message_thread_id', telegramTopicId);
-      zipFormData.append('document', zipBlob, zipFileName);
-      const zipCaption = `🚨 **NEW TOXIC BOSS REPORT** 🚨
+      const telegramMessage = `🚨 **NEW TOXIC BOSS REPORT** 🚨
 
 **Boss:** ${reportData.bossName}
 **Company:** ${reportData.bossCompany}
@@ -159,22 +131,28 @@ ${reportData.categories}
 
 🕐 **Submitted:** ${new Date().toLocaleString()}
 
-📄 **Zip Package:** \`${zipFileName}\`
-${pdfFile ? '- Contains: Detailed report + PDF evidence' : '- Contains: Detailed report only'}`;
+📄 **Report Files:**
+📝 Detailed Report: ${markdownUrl}${pdfFile ? `\n📎 PDF Evidence: ${pdfUrl}` : ''}`;
 
-      zipFormData.append('caption', zipCaption);
-
-      const telegramDocUrl = `https://api.telegram.org/bot${telegramBotToken}/sendDocument`;
-      const zipResponse = await fetch(telegramDocUrl, {
+      const telegramMessageUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+      const messageResponse = await fetch(telegramMessageUrl, {
         method: 'POST',
-        body: zipFormData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: telegramChatId,
+          message_thread_id: telegramTopicId,
+          text: telegramMessage,
+          parse_mode: 'Markdown'
+        }),
       });
 
-      if (!zipResponse.ok) {
-        const zipError = await zipResponse.text();
-        console.error('Zip send failed:', zipError);
+      if (!messageResponse.ok) {
+        const messageError = await messageResponse.text();
+        console.error('Message send failed:', messageError);
       } else {
-        console.log('Zip file sent successfully to Telegram');
+        console.log('Message with R2 links sent successfully to Telegram');
 
         // Save to database after successful Telegram send
         try {
@@ -189,9 +167,8 @@ ${pdfFile ? '- Contains: Detailed report + PDF evidence' : '- Contains: Detailed
               reporterEmail: reportData.reporterEmail,
               reportContent: reportData.reportContent,
               categories: reportData.categories.split(', ').filter(Boolean),
-              markdownPath: `/reports/${markdownFileName}`,
-              pdfPath: pdfFile ? `/reports/${pdfFileName}` : null,
-              zipPath: `/reports/${zipFileName}`,
+              markdownPath: markdownFileName,
+              pdfPath: pdfFile ? pdfFileName : null,
               submissionDate: new Date(reportData.submissionDate),
               verified: false,
               published: false,
@@ -202,24 +179,9 @@ ${pdfFile ? '- Contains: Detailed report + PDF evidence' : '- Contains: Detailed
           console.error('Failed to save to database:', dbError);
           // Continue anyway - don't fail the request if database save fails
         }
-
-        // Clean up files from reports folder after successful send
-        try {
-          await unlink(markdownPath);
-          console.log('Markdown file deleted from reports folder');
-
-          if (pdfFile && pdfFileName) {
-            const pdfPath = join(process.cwd(), 'reports', pdfFileName);
-            await unlink(pdfPath);
-            console.log('PDF file deleted from reports folder');
-          }
-        } catch (cleanupError) {
-          console.log('Could not clean up files from reports folder:', cleanupError);
-          // Don't fail the request if cleanup fails
-        }
       }
     } catch (error) {
-      console.error('Failed to create or send zip file to Telegram:', error);
+      console.error('Failed to send message to Telegram:', error);
     }
 
     return NextResponse.json({
@@ -228,7 +190,8 @@ ${pdfFile ? '- Contains: Detailed report + PDF evidence' : '- Contains: Detailed
       files: {
         markdown: markdownFileName,
         pdf: pdfFileName || null,
-        zip: `${bossNameForFile}_${timestamp}.zip`
+        markdownUrl: markdownUrl,
+        pdfUrl: pdfFile ? pdfUrl : null
       }
     });
 
