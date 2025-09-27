@@ -15,7 +15,9 @@
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "db:reset": "prisma migrate reset",
-    "db:studio": "prisma studio"
+    "db:studio": "prisma studio",
+    "local:up": "npm run local:down && docker-compose up -d --wait && npm run db:deploy",
+    "local:down": "docker-compose down -v --remove-orphans"
   },
   "dependencies": {
     "@prisma/client": "^6.16.2",

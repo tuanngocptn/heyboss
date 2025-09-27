@@ -1,0 +1,69 @@
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:17.5
+    container_name: heyboss-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: heyboss
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres123
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - heyboss-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Waline Comment System
+  waline:
+    image: lizheming/waline:1.31.13
+    container_name: heyboss-waline
+    restart: unless-stopped
+    environment:
+      # Database Configuration (using env variables)
+      TZ: ${WALINE_TZ:-Asia/Ho_Chi_Minh}
+      PG_HOST: ${WALINE_DB_HOST:-postgres}
+      PG_PORT: ${WALINE_DB_PORT:-5432}
+      PG_DB: ${WALINE_DB_NAME:-heyboss}
+      PG_USER: ${WALINE_DB_USER:-postgres}
+      PG_PASSWORD: ${WALINE_DB_PASSWORD:-postgres123}
+      PG_SSL: ${WALINE_G_SSL:-false}
+      DB_TYPE: ${WALINE_DB_TYPE:-pg}
+      DB_TABLE_PREFIX: ${WALINE_DB_TABLE_PREFIX:-wl_}
+
+      # Waline Configuration
+      SITE_NAME: ${WALINE_SITE_NAME:-HeyBoss.WTF}
+      SITE_URL: ${WALINE_SITE_URL:-http://localhost:3000}
+      AUTHOR_EMAIL: ${WALINE_AUTHOR_EMAIL:-admin@heyboss.wtf}
+
+      # Security
+      JWT_TOKEN: ${WALINE_JWT_TOKEN:-your-jwt-secret-key-change-this}
+      SECURE_DOMAINS: ${WALINE_SECURE_DOMAINS:-localhost,heyboss.wtf}
+
+      # Optional: Social Login (uncomment and configure as needed)
+      # GITHUB_ID: ${WALINE_GITHUB_ID}
+      # GITHUB_SECRET: ${WALINE_GITHUB_SECRET}
+      # GOOGLE_ID: ${WALINE_GOOGLE_ID}
+      # GOOGLE_SECRET: ${WALINE_GOOGLE_SECRET}
+    ports:
+      - "8360:8360"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - heyboss-network
+
+
+networks:
+  heyboss-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
