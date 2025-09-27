@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { writeFile, unlink } from 'fs/promises';
 import { join } from 'path';
 import JSZip from 'jszip';
+import { prisma } from '@/lib/db';
 
 export async function POST(request: NextRequest) {
   try {
@@ -174,6 +175,33 @@ ${pdfFile ? '- Contains: Detailed report + PDF evidence' : '- Contains: Detailed
         console.error('Zip send failed:', zipError);
       } else {
         console.log('Zip file sent successfully to Telegram');
+
+        // Save to database after successful Telegram send
+        try {
+          const savedBoss = await prisma.toxicBoss.create({
+            data: {
+              bossName: reportData.bossName,
+              bossCompany: reportData.bossCompany,
+              bossPosition: reportData.bossPosition,
+              bossDepartment: reportData.bossDepartment,
+              bossAge: reportData.bossAge ? parseInt(reportData.bossAge) || null : null,
+              workLocation: reportData.workLocation,
+              reporterEmail: reportData.reporterEmail,
+              reportContent: reportData.reportContent,
+              categories: reportData.categories.split(', ').filter(Boolean),
+              markdownPath: `/reports/${markdownFileName}`,
+              pdfPath: pdfFile ? `/reports/${pdfFileName}` : null,
+              zipPath: `/reports/${zipFileName}`,
+              submissionDate: new Date(reportData.submissionDate),
+              verified: false,
+              published: false,
+            },
+          });
+          console.log('Boss report saved to database with ID:', savedBoss.id);
+        } catch (dbError) {
+          console.error('Failed to save to database:', dbError);
+          // Continue anyway - don't fail the request if database save fails
+        }
 
         // Clean up files from reports folder after successful send
         try {

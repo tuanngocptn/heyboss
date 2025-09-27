@@ -1,0 +1,125 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Comment {
+  id         Int       @id @default(autoincrement())
+  userId     Int?      @map("user_id")
+  comment    String?
+  insertedAt DateTime  @default(now()) @map("insertedat")
+  ip         String?   @default("")
+  link       String?
+  mail       String?
+  nick       String?
+  pid        Int? // Parent comment ID
+  rid        Int? // Root comment ID
+  sticky     Decimal?
+  status     String    @default("")
+  like       Int?      @map("like")
+  ua         String?
+  url        String?
+  createdAt  DateTime? @default(now()) @map("createdat")
+  updatedAt  DateTime? @updatedAt @map("updatedat")
+
+  // Relation to the user who posted the comment
+  user Users? @relation(fields: [userId], references: [id])
+
+  // Self-relation for parent comment
+  parent  Comment?  @relation("CommentReplies", fields: [pid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies Comment[] @relation("CommentReplies")
+
+  // Self-relation for the root comment in a thread
+  root          Comment?  @relation("ThreadRoot", fields: [rid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  threadReplies Comment[] @relation("ThreadRoot")
+
+  @@map("wl_comment")
+}
+
+model Counter {
+  id        Int       @id @default(autoincrement())
+  time      Int?
+  reaction0 Int?
+  reaction1 Int?
+  reaction2 Int?
+  reaction3 Int?
+  reaction4 Int?
+  reaction5 Int?
+  reaction6 Int?
+  reaction7 Int?
+  reaction8 Int?
+  url       String    @default("")
+  createdAt DateTime? @default(now()) @map("createdat")
+  updatedAt DateTime? @updatedAt @map("updatedat")
+
+  @@map("wl_counter")
+}
+
+model Users {
+  id          Int       @id @default(autoincrement())
+  displayName String    @default("") @map("display_name")
+  email       String    @default("")
+  password    String    @default("")
+  type        String    @default("")
+  label       String?
+  url         String?
+  avatar      String?
+  github      String?
+  twitter     String?
+  facebook    String?
+  google      String?
+  weibo       String?
+  qq          String?
+  twoFactor   String?   @map("2fa")
+  createdAt   DateTime? @default(now()) @map("createdat")
+  updatedAt   DateTime? @updatedAt @map("updatedat")
+
+  // Relation to comments made by the user
+  comments Comment[]
+
+  @@map("wl_users")
+}
+
+model ToxicBoss {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Boss Information
+  bossName       String
+  bossCompany    String?
+  bossPosition   String?
+  bossDepartment String?
+  bossAge        Int?
+  workLocation   String?
+
+  // Reporter Information
+  reporterEmail String?
+
+  // Report Details
+  reportContent String // Detailed report content
+  categories    String[] // Array of toxic behavior categories
+
+  // File Paths (stored as URI paths)
+  markdownPath String? // Path to markdown file
+  pdfPath      String? // Path to PDF evidence file
+  zipPath      String? // Path to zip package
+
+  // Metadata
+  submissionDate DateTime
+  verified       Boolean  @default(false)
+  published      Boolean  @default(false)
+
+  @@index([bossName])
+  @@index([bossCompany])
+  @@index([workLocation])
+  @@index([submissionDate])
+  @@map("toxic_bosses")
+}
