@@ -116,6 +116,7 @@ model ToxicBoss {
   submissionDate DateTime
   verified       Boolean  @default(false)
   published      Boolean  @default(false)
+  locked         Boolean  @default(false)
 
   @@index([bossName])
   @@index([bossCompany])
