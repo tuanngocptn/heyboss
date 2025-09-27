@@ -9,12 +9,7 @@ This guide explains how to run the HeyBoss.WTF application with PostgreSQL and W
 
 ## Quick Start
 
-1. **Copy environment file:**
-   ```bash
-   cp .env.docker .env
-   ```
-
-2. **Edit environment variables:**
+1. **Edit environment variables:**
    ```bash
    nano .env
    ```
@@ -24,17 +19,17 @@ This guide explains how to run the HeyBoss.WTF application with PostgreSQL and W
    - `TURNSTILE_SECRET_KEY`
    - `NEXT_PUBLIC_TURNSTILE_SITE_KEY`
 
-3. **Start all services:**
+2. **Start Docker services:**
    ```bash
-   docker-compose up -d
+   npm run local:up
    ```
 
-4. **Run database migrations:**
+3. **Start HeyBoss application locally:**
    ```bash
-   docker-compose exec heyboss npx prisma migrate deploy
+   npm run dev
    ```
 
-5. **Access the application:**
+4. **Access the services:**
    - **HeyBoss App**: http://localhost:3000
    - **Waline Comments**: http://localhost:8360
    - **PostgreSQL**: localhost:5432
@@ -55,28 +50,25 @@ This guide explains how to run the HeyBoss.WTF application with PostgreSQL and W
 - **Database**: Uses PostgreSQL with `wl_` prefix
 
 ### HeyBoss App
-- **Container**: `heyboss-app`
+- **Development**: Runs locally via `npm run dev`
 - **Port**: 3000
-- **Build**: Built from source code
+- **Environment**: Uses shared `.env` file
 
 ## Commands
 
 ```bash
-# Start all services
-docker-compose up -d
+# Start Docker services only (PostgreSQL + Waline)
+npm run local:up
+
+# Stop Docker services and clean up
+npm run local:down
 
 # View logs
 docker-compose logs -f
 
-# Stop all services
-docker-compose down
-
-# Rebuild and start
-docker-compose up --build -d
-
 # Database operations
-docker-compose exec heyboss npx prisma migrate deploy
-docker-compose exec heyboss npx prisma studio
+npm run db:migrate
+npm run db:studio
 
 # Access PostgreSQL
 docker-compose exec postgres psql -U postgres -d heyboss
