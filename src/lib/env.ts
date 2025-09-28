@@ -17,7 +17,7 @@ export function getBaseUrl(): string {
     process.env.NEXT_PUBLIC_API_URL ||
     process.env.NEXTAUTH_URL ||
     process.env.WALINE_SITE_URL ||
-    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
     'http://localhost:3000'
   );
 }
