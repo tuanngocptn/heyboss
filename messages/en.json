@@ -91,7 +91,26 @@
     "search": "Search by boss name or company...",
     "results": "Found {count} result",
     "resultsPlural": "Found {count} results",
+    "resultsCount": "Showing {start}-{end} of {total} results",
     "searchFor": "for \"{term}\"",
+    "filters": {
+      "allCompanies": "All Companies",
+      "allLocations": "All Locations",
+      "allStatuses": "All Statuses",
+      "allPublished": "All Published",
+      "verified": "Verified Only",
+      "unverified": "Unverified Only",
+      "published": "Published Only",
+      "unpublished": "Unpublished Only"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "error": {
+      "title": "Something Went Wrong",
+      "retry": "Try Again"
+    },
     "noResults": {
       "title": "No Results Found",
       "description": "Try adjusting your search terms or browse all listings below."

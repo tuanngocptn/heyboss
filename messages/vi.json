@@ -91,7 +91,26 @@
     "search": "Tìm kiếm theo tên sếp hoặc công ty...",
     "results": "Tìm thấy {count} kết quả",
     "resultsPlural": "Tìm thấy {count} kết quả",
+    "resultsCount": "Hiển thị {start}-{end} trong tổng số {total} kết quả",
     "searchFor": "cho \"{term}\"",
+    "filters": {
+      "allCompanies": "Tất Cả Công Ty",
+      "allLocations": "Tất Cả Địa Điểm",
+      "allStatuses": "Tất Cả Trạng Thái",
+      "allPublished": "Tất Cả Đã Xuất Bản",
+      "verified": "Chỉ Đã Xác Minh",
+      "unverified": "Chỉ Chưa Xác Minh",
+      "published": "Chỉ Đã Xuất Bản",
+      "unpublished": "Chỉ Chưa Xuất Bản"
+    },
+    "pagination": {
+      "previous": "Trước",
+      "next": "Tiếp"
+    },
+    "error": {
+      "title": "Có Lỗi Xảy Ra",
+      "retry": "Thử Lại"
+    },
     "noResults": {
       "title": "Không Tìm Thấy Kết Quả",
       "description": "Thử điều chỉnh từ khóa tìm kiếm hoặc duyệt tất cả danh sách bên dưới."
