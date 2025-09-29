@@ -8,18 +8,11 @@
  */
 export function getBaseUrl(): string {
   if (typeof window !== 'undefined') {
-    // Client-side: prefer public environment variable or current origin
-    return process.env.NEXT_PUBLIC_API_URL || window.location.origin;
+    return process.env.NEXT_PUBLIC_API_URL || 'https://heyboss.wtf';
   }
 
   // Server-side: check various environment variables
-  return (
-    process.env.NEXT_PUBLIC_API_URL ||
-    process.env.NEXTAUTH_URL ||
-    process.env.WALINE_SITE_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null) ||
-    'http://localhost:3000'
-  );
+  return process.env.NEXT_PUBLIC_APP_URL || 'https://heyboss.wtf';
 }
 
 /**
