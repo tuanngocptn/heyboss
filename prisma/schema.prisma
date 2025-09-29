@@ -89,33 +89,33 @@ model Users {
 
 model ToxicBoss {
   id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   // Boss Information
-  bossName       String
-  bossCompany    String?
-  bossPosition   String?
-  bossDepartment String?
-  bornYear       Int?
-  workLocation   String?
+  bossName       String  @map("boss_name")
+  bossCompany    String? @map("boss_company")
+  bossPosition   String? @map("boss_position")
+  bossDepartment String? @map("boss_department")
+  bornYear       Int?    @map("born_year")
+  workLocation   String? @map("work_location")
 
   // Reporter Information
-  reporterEmail String?
+  reporterEmail String? @map("reporter_email")
 
   // Report Details
-  reportContent String // Detailed report content
-  categories    String[] // Array of toxic behavior categories
+  reportContent String   @map("report_content") // Detailed report content
+  categories    String[] @map("categories") // Array of toxic behavior categories
 
   // File Paths (stored as URI paths)
-  markdownPath String? // Path to markdown file
-  pdfPath      String? // Path to PDF evidence file
+  markdownPath String? @map("markdown_path") // Path to markdown file
+  pdfPath      String? @map("pdf_path") // Path to PDF evidence file
 
   // Metadata
-  submissionDate DateTime
-  verified       Boolean  @default(false)
+  submissionDate DateTime @map("submission_date")
+  verified       Boolean  @default(false) @map("verified")
   published      Boolean  @default(false)
-  locked         Boolean  @default(false)
+  locked         Boolean  @default(false) @map("locked")
 
   @@index([bossName])
   @@index([bossCompany])
