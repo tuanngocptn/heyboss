@@ -7,6 +7,7 @@ import { useState, useEffect, useCallback } from "react";
 import { use } from "react";
 import { getBaseUrl } from '@/lib/env';
 import { marked } from 'marked';
+import WalineComments from '@/components/WalineComments';
 
 interface ToxicBoss {
   id: string;
@@ -332,6 +333,18 @@ export default function BossProfile({ params }: { params: Promise<{ id: string }
         </div>
       </section>
 
+      {/* Comments Section */}
+      <section className="px-4 md:px-6 py-8 md:py-12">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-2xl md:text-3xl font-bold mb-6 md:mb-8">{t('boss.comments.title')}</h2>
+          <div className="bg-gray-800 rounded-lg p-4 md:p-6">
+            <WalineComments
+              path={`/boss/${resolvedParams.id}`}
+              serverURL={process.env.NEXT_PUBLIC_WALINE_URL || 'http://localhost:8360'}
+            />
+          </div>
+        </div>
+      </section>
 
       {/* Help Section */}
       <section className="px-4 md:px-6 py-12 md:py-20 bg-gray-800">
