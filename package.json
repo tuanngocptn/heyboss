@@ -24,7 +24,9 @@
     "test:all": "npm run type-check && npm run lint && npm test",
     "test:verbose": "jest --verbose",
     "test:api": "jest --testPathPatterns=api",
-    "db:seed": "tsx prisma/seed/seed.ts"
+    "db:seed": "tsx prisma/seed/seed.ts",
+    "prd:reset": "node --env-file=.env.production && prisma migrate reset",
+    "prd:deploy": "node --env-file=.env.production && prisma migrate deploy"
   },
   "dependencies": {
     "@editorjs/code": "^2.9.3",

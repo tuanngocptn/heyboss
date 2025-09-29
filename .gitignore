@@ -31,9 +31,10 @@ yarn-error.log*
 .pnpm-debug.log*
 
 # env files (can opt-in for committing if needed)
-.env*.local
+.env
+# .env*.local
 .env.dev
-.env.production
+# .env.production
 .env.staging
 
 # Keep these env files in the repository
