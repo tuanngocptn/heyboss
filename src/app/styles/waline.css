@@ -1342,3 +1342,30 @@
 }
 
 /*# sourceMappingURL=waline.css.map */
+
+/* Custom styles to hide user avatars */
+.wl-cards .wl-user .wl-user-avatar,
+.wl-user-list .wl-user-avatar,
+.wl-user-wall .wl-user-avatar,
+.wl-avatar {
+    display: none !important;
+}
+
+/* Hide verified icons */
+.wl-cards .wl-user .verified-icon {
+    display: none !important;
+}
+
+/* Hide meta information */
+.wl-meta {
+    display: none !important;
+}
+
+/* Adjust spacing when avatars are hidden */
+.wl-cards .wl-user {
+    margin-inline-end: 0 !important;
+}
+
+.wl-card:first-child {
+    margin-inline-start: 0 !important;
+}
