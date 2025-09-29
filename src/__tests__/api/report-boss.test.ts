@@ -78,7 +78,6 @@ describe("/api/report-boss", () => {
         expect(savedReport).toBeTruthy();
         expect(savedReport?.bossName).toBe(mockReportData.bossName);
         expect(savedReport?.bossCompany).toBe(mockReportData.bossCompany);
-        expect(savedReport?.reportContent).toBe(mockReportData.reportContent);
         expect(savedReport?.categories).toEqual(["Verbal Abuse", "Micromanagement"]);
         // Database should store URI (filename) not full URL
         expect(savedReport?.markdownPath).toMatch(/^\d{10}-test-boss-toxic\.md$/);

@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
         published: true,
         locked: true,
         createdAt: true,
-        // Exclude sensitive data like reporterEmail and reportContent
+        // Exclude sensitive data like reporterEmail
       },
       orderBy: {
         submissionDate: 'desc',

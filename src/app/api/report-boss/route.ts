@@ -166,7 +166,6 @@ ${reportData.categories}
               bornYear: reportData.bornYear ? parseInt(reportData.bornYear) || null : null,
               workLocation: reportData.workLocation,
               reporterEmail: reportData.reporterEmail,
-              reportContent: reportData.reportContent,
               categories: reportData.categories.split(', ').filter(Boolean),
               markdownPath: markdownFileName,
               pdfPath: pdfFile ? pdfFileName : null,

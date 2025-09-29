@@ -104,7 +104,6 @@ model ToxicBoss {
   reporterEmail String? @map("reporter_email")
 
   // Report Details
-  reportContent String   @map("report_content") // Detailed report content
   categories    String[] @map("categories") // Array of toxic behavior categories
 
   // File Paths (stored as URI paths)

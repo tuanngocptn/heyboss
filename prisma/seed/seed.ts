@@ -265,7 +265,6 @@ async function main() {
       bornYear,
       workLocation: location,
       reporterEmail,
-      reportContent,
       categories,
       markdownPath: `seed.md`,
       pdfPath: `seed.pdf`,

@@ -73,13 +73,12 @@ describe("/api/toxic-bosses", () => {
         bornYear: 1980 + (i % 10),
         workLocation: i % 3 === 0 ? 'New York, NY' : 'San Francisco, CA',
         reporterEmail: `test${i + 1}@example.com`,
-        reportContent: `This test boss ${i + 1} is very toxic and abusive`,
         categories: ['Verbal Abuse', 'Micromanagement'],
         markdownPath: `test-${i + 1}.md`,
         pdfPath: i % 2 === 0 ? `test-${i + 1}.pdf` : null,
         submissionDate: new Date(Date.now() - i * 86400000), // Different dates
-        verified: i % 4 === 0, // Every 4th record is verified
-        published: i % 5 === 0, // Every 5th record is published
+        verified: i % 2 === 0, // Every 2nd record is verified
+        published: i % 2 === 0, // Every 2nd record is published
         locked: i % 10 === 0, // Every 10th record is locked
       }));
 
@@ -95,12 +94,12 @@ describe("/api/toxic-bosses", () => {
 
       expect(response.status).toBe(200);
       expect(result.success).toBe(true);
-      expect(result.data).toHaveLength(20); // Default limit
+      expect(result.data).toHaveLength(13); // 13 records are both published and verified
       expect(result.pagination.currentPage).toBe(1);
       expect(result.pagination.limit).toBe(20);
-      expect(result.pagination.totalCount).toBe(25);
-      expect(result.pagination.totalPages).toBe(2);
-      expect(result.pagination.hasNextPage).toBe(true);
+      expect(result.pagination.totalCount).toBe(13);
+      expect(result.pagination.totalPages).toBe(1);
+      expect(result.pagination.hasNextPage).toBe(false);
       expect(result.pagination.hasPreviousPage).toBe(false);
 
       // Verify data structure and sensitive data exclusion
@@ -121,7 +120,6 @@ describe("/api/toxic-bosses", () => {
 
       // Sensitive data should be excluded
       expect(firstBoss).not.toHaveProperty('reporterEmail');
-      expect(firstBoss).not.toHaveProperty('reportContent');
       expect(firstBoss).not.toHaveProperty('markdownPath');
       expect(firstBoss).not.toHaveProperty('pdfPath');
     });
@@ -133,7 +131,7 @@ describe("/api/toxic-bosses", () => {
 
       expect(response.status).toBe(200);
       expect(result.success).toBe(true);
-      expect(result.data).toHaveLength(5); // Remaining 5 records
+      expect(result.data).toHaveLength(0); // No records on second page
       expect(result.pagination.currentPage).toBe(2);
       expect(result.pagination.hasNextPage).toBe(false);
       expect(result.pagination.hasPreviousPage).toBe(true);
@@ -148,7 +146,7 @@ describe("/api/toxic-bosses", () => {
       expect(result.success).toBe(true);
       expect(result.data).toHaveLength(10);
       expect(result.pagination.limit).toBe(10);
-      expect(result.pagination.totalPages).toBe(3);
+      expect(result.pagination.totalPages).toBe(2);
     });
 
     it("should filter by search parameter", async () => {

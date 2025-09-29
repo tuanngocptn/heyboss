@@ -10,7 +10,6 @@ CREATE TABLE "public"."toxic_bosses" (
     born_year INTEGER,
     work_location TEXT,
     reporter_email TEXT,
-    report_content TEXT NOT NULL,
     categories TEXT[],
     markdown_path TEXT,
     pdf_path TEXT,
