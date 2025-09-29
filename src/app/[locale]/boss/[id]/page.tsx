@@ -299,22 +299,61 @@ export default function BossProfile({ params }: { params: Promise<{ id: string }
               </div>
             ) : pdfUrl ? (
               <div className="w-full">
-                {/* PDF Viewer using iframe */}
-                <div className="bg-white rounded-lg p-4">
-                  <iframe
-                    src={pdfUrl}
-                    className="w-full h-[600px] border-0"
-                    title="PDF Document"
-                  />
+                {/* PDF Viewer - Desktop iframe, Mobile-friendly fallback */}
+                <div className="hidden md:block">
+                  <div className="bg-white rounded-lg p-4">
+                    <iframe
+                      src={pdfUrl}
+                      className="w-full h-[600px] border-0"
+                      title="PDF Document"
+                    />
+                  </div>
                 </div>
+
+                {/* Mobile-friendly PDF viewer */}
+                <div className="block md:hidden">
+                  <div className="bg-gray-700 rounded-lg p-6 text-center">
+                    <div className="text-6xl mb-4">📄</div>
+                    <h3 className="text-xl font-semibold mb-4 text-white">PDF Document Available</h3>
+                    <p className="text-gray-300 mb-6">
+                      For the best viewing experience on mobile, please open the PDF in your device's PDF viewer.
+                    </p>
+                    <div className="space-y-3">
+                      <a
+                        href={pdfUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+                      >
+                        📱 Open PDF in App
+                      </a>
+                      <a
+                        href={pdfUrl}
+                        download
+                        className="block w-full px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-semibold"
+                      >
+                        💾 Download PDF
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Desktop download option */}
                 <div className="mt-4 text-center">
                   <a
                     href={pdfUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                    className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors mr-2"
                   >
-                    Open PDF in New Tab
+                    Open in New Tab
+                  </a>
+                  <a
+                    href={pdfUrl}
+                    download
+                    className="inline-block px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+                  >
+                    Download PDF
                   </a>
                 </div>
               </div>
