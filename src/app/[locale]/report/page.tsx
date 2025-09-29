@@ -4,10 +4,22 @@ import {Link, useRouter} from '@/i18n/routing';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import Footer from '@/components/Footer';
 import Turnstile from '@/components/Turnstile';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import dynamic from 'next/dynamic';
+
+const EditorJsEditor = dynamic(() => import('@/components/EditorJsEditor'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full bg-gray-700 border border-gray-600 rounded-lg min-h-[300px] flex items-center justify-center">
+      <div className="text-gray-400">Loading Editor.js...</div>
+    </div>
+  ),
+});
+
+import { EditorJsEditorRef } from '@/components/EditorJsEditor';
 
 interface TutorialStep {
   title: string;
@@ -40,6 +52,9 @@ export default function ReportPage() {
   // Environment check
   const isProduction = process.env.NODE_ENV === 'production';
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+
+  // Editor.js ref
+  const editorRef = useRef<EditorJsEditorRef>(null);
 
   // Form schema with translations
   const formSchema = createFormSchema(t);
@@ -99,6 +114,9 @@ export default function ReportPage() {
       return;
     }
 
+    // Get markdown content from editor
+    const markdownContent = await editorRef.current?.getMarkdown() || data.reportContent.trim();
+
     try {
       // Create FormData for file upload
       const formData = new FormData();
@@ -112,7 +130,7 @@ export default function ReportPage() {
         bossDepartment: data.bossDepartment?.trim() || 'Not specified',
         bornYear: data.bornYear?.trim() || 'Not specified',
         workLocation: data.workLocation?.trim() || 'Not specified',
-        reportContent: data.reportContent.trim(),
+        reportContent: markdownContent,
         categories: data.categories.join(', ') || 'Not specified',
         submissionDate: new Date().toISOString(),
       };
@@ -428,22 +446,26 @@ export default function ReportPage() {
               <label htmlFor="reportContent" className="block text-sm font-medium text-gray-300 mb-2">
                 {t('report.form.reportContent')} *
               </label>
-              <textarea
-                {...register('reportContent')}
-                id="reportContent"
-                placeholder={t('report.form.reportContentPlaceholder')}
-                rows={8}
-                className={`w-full px-4 py-3 bg-gray-700 border rounded-lg text-white placeholder-gray-400 focus:outline-none resize-vertical ${
-                  errors.reportContent
-                    ? 'border-red-500 focus:border-red-500'
-                    : 'border-gray-600 focus:border-red-500'
-                }`}
-              />
-              {errors.reportContent && (
-                <p className="text-sm text-red-400 mt-2">
-                  ⚠ {errors.reportContent.message}
-                </p>
-              )}
+              <div className="space-y-2">
+                <EditorJsEditor
+                  ref={editorRef}
+                  placeholder={t('report.form.reportContentPlaceholder')}
+                  error={!!errors.reportContent}
+                  onChange={(markdown) => {
+                    setValue('reportContent', markdown);
+                  }}
+                />
+                {/* Hidden input for form validation */}
+                <input
+                  {...register('reportContent')}
+                  type="hidden"
+                />
+                {errors.reportContent && (
+                  <p className="text-sm text-red-400 mt-2">
+                    ⚠ {errors.reportContent.message}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
 
