@@ -12,19 +12,10 @@ export async function GET(
       return NextResponse.json({ error: 'Boss ID is required' }, { status: 400 });
     }
 
-    // Try to find by ID first, then by name-company slug format
+    // Try to find by ID first
     let boss = await prisma.toxicBoss.findFirst({
       where: {
-        OR: [
-          { id: id },
-          {
-            // For slug format like "john-doe-acme-corp"
-            AND: [
-              { published: true },
-              { verified: true }
-            ]
-          }
-        ]
+        id: id
       }
     });
 

@@ -13,18 +13,9 @@ export async function GET(
     }
 
     // Find the boss record to get the markdown path
-    const boss = await prisma.toxicBoss.findFirst({
+    let boss = await prisma.toxicBoss.findFirst({
       where: {
-        OR: [
-          { id: id },
-          {
-            // For slug format - try to match published and verified records
-            AND: [
-              { published: true },
-              { verified: true }
-            ]
-          }
-        ]
+        id: id
       },
       select: {
         id: true,
@@ -35,6 +26,37 @@ export async function GET(
         bossCompany: true
       }
     });
+
+    // If not found by ID, try slug-based lookup
+    if (!boss && id.includes('-')) {
+      const parts = id.split('-');
+
+      for (let i = 1; i < parts.length; i++) {
+        const namePart = parts.slice(0, i).join(' ');
+        const companyPart = parts.slice(i).join(' ');
+
+        boss = await prisma.toxicBoss.findFirst({
+          where: {
+            AND: [
+              { bossName: { contains: namePart, mode: 'insensitive' } },
+              { bossCompany: { contains: companyPart, mode: 'insensitive' } },
+              { published: true },
+              { verified: true }
+            ]
+          },
+          select: {
+            id: true,
+            markdownPath: true,
+            published: true,
+            verified: true,
+            bossName: true,
+            bossCompany: true
+          }
+        });
+
+        if (boss) break;
+      }
+    }
 
     if (!boss || !boss.published || !boss.verified) {
       return NextResponse.json({ error: 'Boss not found' }, { status: 404 });
